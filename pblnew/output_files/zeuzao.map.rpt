@@ -1,0 +1,978 @@
+Analysis & Synthesis report for zeuzao
+Mon Nov 03 21:57:09 2025
+Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Inverted Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU6"
+ 12. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU5"
+ 13. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU4"
+ 14. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU3"
+ 15. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU2"
+ 16. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU1"
+ 17. Port Connectivity Checks: "main:conversor_display|mux4to1:muxU0"
+ 18. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD6"
+ 19. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD5"
+ 20. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD4"
+ 21. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD3"
+ 22. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD2"
+ 23. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD1"
+ 24. Port Connectivity Checks: "main:conversor_display|mux4to1:muxD0"
+ 25. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC6"
+ 26. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC5"
+ 27. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC4"
+ 28. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC3"
+ 29. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC2"
+ 30. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC1"
+ 31. Port Connectivity Checks: "main:conversor_display|mux4to1:muxC0"
+ 32. Port Connectivity Checks: "main:conversor_display|binToBcd:convBcd|decoderSaida:dec2"
+ 33. Port Connectivity Checks: "main:conversor_display|binToHex:convHex|decoderSaida:dec2"
+ 34. Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec2"
+ 35. Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec1"
+ 36. Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec0"
+ 37. Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_hh"
+ 38. Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_hl"
+ 39. Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_lh"
+ 40. Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_ll"
+ 41. Port Connectivity Checks: "DIV8bit:div_module"
+ 42. Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder3"
+ 43. Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder2"
+ 44. Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder1"
+ 45. Port Connectivity Checks: "SUB8bit:subtrator|Addition8bit:sub_adder"
+ 46. Port Connectivity Checks: "Addition8bit:somador"
+ 47. Port Connectivity Checks: "registrador_resultado:reg_resultado"
+ 48. Post-Synthesis Netlist Statistics for Top Partition
+ 49. Elapsed Time Per Partition
+ 50. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++------------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Mon Nov 03 21:57:09 2025       ;
+; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Lite Edition ;
+; Revision Name                      ; zeuzao                                      ;
+; Top-level Entity Name              ; ULA8bit_PRINCIPAL                           ;
+; Family                             ; MAX 10                                      ;
+; Total logic elements               ; 436                                         ;
+;     Total combinational functions  ; 408                                         ;
+;     Dedicated logic registers      ; 44                                          ;
+; Total registers                    ; 44                                          ;
+; Total pins                         ; 50                                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 0                                           ;
+; Embedded Multiplier 9-bit elements ; 0                                           ;
+; Total PLLs                         ; 0                                           ;
+; UFM blocks                         ; 0                                           ;
+; ADC blocks                         ; 0                                           ;
++------------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C7G     ;                    ;
+; Top-level entity name                                            ; ULA8bit_PRINCIPAL  ; zeuzao             ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 6           ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 6           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-6         ;   0.0%      ;
++----------------------------+-------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                    ;
++----------------------------------+-----------------+------------------------+-----------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path      ; Library ;
++----------------------------------+-----------------+------------------------+-----------------------------------+---------+
+; Addition4bit.v                   ; yes             ; User Verilog HDL File  ; C:/pblnew/Addition4bit.v          ;         ;
+; Addition8bit.v                   ; yes             ; User Verilog HDL File  ; C:/pblnew/Addition8bit.v          ;         ;
+; AND4bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/AND4bit.v               ;         ;
+; AND8bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/AND8bit.v               ;         ;
+; contador_estados.v               ; yes             ; User Verilog HDL File  ; C:/pblnew/contador_estados.v      ;         ;
+; DFF3bit_simples.v                ; yes             ; User Verilog HDL File  ; C:/pblnew/DFF3bit_simples.v       ;         ;
+; DFF8bit_simples.v                ; yes             ; User Verilog HDL File  ; C:/pblnew/DFF8bit_simples.v       ;         ;
+; DFF_simples.v                    ; yes             ; User Verilog HDL File  ; C:/pblnew/DFF_simples.v           ;         ;
+; display7seg_OPERADOR.v           ; yes             ; User Verilog HDL File  ; C:/pblnew/display7seg_OPERADOR.v  ;         ;
+; DIV4bit_practical.v              ; yes             ; User Verilog HDL File  ; C:/pblnew/DIV4bit_practical.v     ;         ;
+; DIV8bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/DIV8bit.v               ;         ;
+; MULT4bit.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/MULT4bit.v              ;         ;
+; MULT8bit.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/MULT8bit.v              ;         ;
+; MUX8x4.v                         ; yes             ; User Verilog HDL File  ; C:/pblnew/MUX8x4.v                ;         ;
+; MUX8x8.v                         ; yes             ; User Verilog HDL File  ; C:/pblnew/MUX8x8.v                ;         ;
+; mux_operando.v                   ; yes             ; User Verilog HDL File  ; C:/pblnew/mux_operando.v          ;         ;
+; NOT8bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/NOT8bit.v               ;         ;
+; OR4bit.v                         ; yes             ; User Verilog HDL File  ; C:/pblnew/OR4bit.v                ;         ;
+; OR8bit.v                         ; yes             ; User Verilog HDL File  ; C:/pblnew/OR8bit.v                ;         ;
+; registrador_resultado.v          ; yes             ; User Verilog HDL File  ; C:/pblnew/registrador_resultado.v ;         ;
+; Rot2Ckt1.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/Rot2Ckt1.v              ;         ;
+; SUB8bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/SUB8bit.v               ;         ;
+; ULA8bit_PRINCIPAL.v              ; yes             ; User Verilog HDL File  ; C:/pblnew/ULA8bit_PRINCIPAL.v     ;         ;
+; XOR4bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/XOR4bit.v               ;         ;
+; XOR8bit.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/XOR8bit.v               ;         ;
+; debounce.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/debounce.v              ;         ;
+; FLAGS8bit.v                      ; yes             ; User Verilog HDL File  ; C:/pblnew/FLAGS8bit.v             ;         ;
+; DFF2bit_simples.v                ; yes             ; User Verilog HDL File  ; C:/pblnew/DFF2bit_simples.v       ;         ;
+; mux4to1.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/mux4to1.v               ;         ;
+; mux2to1.v                        ; yes             ; User Verilog HDL File  ; C:/pblnew/mux2to1.v               ;         ;
+; main.v                           ; yes             ; User Verilog HDL File  ; C:/pblnew/main.v                  ;         ;
+; decoderSaida.v                   ; yes             ; User Verilog HDL File  ; C:/pblnew/decoderSaida.v          ;         ;
+; binToOct.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/binToOct.v              ;         ;
+; binToHex.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/binToHex.v              ;         ;
+; binToBcd.v                       ; yes             ; User Verilog HDL File  ; C:/pblnew/binToBcd.v              ;         ;
++----------------------------------+-----------------+------------------------+-----------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimated Total logic elements              ; 436            ;
+;                                             ;                ;
+; Total combinational functions               ; 408            ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 278            ;
+;     -- 3 input functions                    ; 82             ;
+;     -- <=2 input functions                  ; 48             ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 408            ;
+;     -- arithmetic mode                      ; 0              ;
+;                                             ;                ;
+; Total registers                             ; 44             ;
+;     -- Dedicated logic registers            ; 44             ;
+;     -- I/O registers                        ; 0              ;
+;                                             ;                ;
+; I/O pins                                    ; 50             ;
+;                                             ;                ;
+; Embedded Multiplier 9-bit elements          ; 0              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; CLOCK_50~input ;
+; Maximum fan-out                             ; 44             ;
+; Total fan-out                               ; 1693           ;
+; Average fan-out                             ; 3.07           ;
++---------------------------------------------+----------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                       ;
++--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+-----------------------+--------------+
+; Compilation Hierarchy Node                 ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                              ; Entity Name           ; Library Name ;
++--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+-----------------------+--------------+
+; |ULA8bit_PRINCIPAL                         ; 408 (8)             ; 44 (2)                    ; 0           ; 0          ; 0            ; 0       ; 0         ; 50   ; 0            ; 0          ; |ULA8bit_PRINCIPAL                                                                               ; ULA8bit_PRINCIPAL     ; work         ;
+;    |AND8bit:and_module|                    ; 2 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|AND8bit:and_module                                                            ; AND8bit               ; work         ;
+;       |AND4bit:and_high|                   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|AND8bit:and_module|AND4bit:and_high                                           ; AND4bit               ; work         ;
+;       |AND4bit:and_low|                    ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|AND8bit:and_module|AND4bit:and_low                                            ; AND4bit               ; work         ;
+;    |Addition8bit:somador|                  ; 11 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador                                                          ; Addition8bit          ; work         ;
+;       |Addition4bit:high_bits|             ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits                                   ; Addition4bit          ; work         ;
+;          |Rot2Ckt1:bit0|                   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit0                     ; Rot2Ckt1              ; work         ;
+;          |Rot2Ckt1:bit1|                   ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit1                     ; Rot2Ckt1              ; work         ;
+;          |Rot2Ckt1:bit3|                   ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit3                     ; Rot2Ckt1              ; work         ;
+;       |Addition4bit:low_bits|              ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits                                    ; Addition4bit          ; work         ;
+;          |Rot2Ckt1:bit0|                   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit0                      ; Rot2Ckt1              ; work         ;
+;          |Rot2Ckt1:bit1|                   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit1                      ; Rot2Ckt1              ; work         ;
+;          |Rot2Ckt1:bit3|                   ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit3                      ; Rot2Ckt1              ; work         ;
+;    |DFF2bit_simples:registro_sel_exibicao| ; 0 (0)               ; 2 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao                                         ; DFF2bit_simples       ; work         ;
+;       |DFF_simples:dff0|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao|DFF_simples:dff0                        ; DFF_simples           ; work         ;
+;       |DFF_simples:dff1|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao|DFF_simples:dff1                        ; DFF_simples           ; work         ;
+;    |DFF3bit_simples:registro_OP|           ; 0 (0)               ; 3 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP                                                   ; DFF3bit_simples       ; work         ;
+;       |DFF_simples:dff0|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff0                                  ; DFF_simples           ; work         ;
+;       |DFF_simples:dff1|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff1                                  ; DFF_simples           ; work         ;
+;       |DFF_simples:dff2|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff2                                  ; DFF_simples           ; work         ;
+;    |DFF8bit_simples:registro_A|            ; 0 (0)               ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A                                                    ; DFF8bit_simples       ; work         ;
+;       |DFF_simples:dff0|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff0                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff1|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff1                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff2|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff2                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff3|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff3                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff4|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff4                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff5|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff5                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff6|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff6                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff7|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff7                                   ; DFF_simples           ; work         ;
+;    |DFF8bit_simples:registro_B|            ; 0 (0)               ; 8 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B                                                    ; DFF8bit_simples       ; work         ;
+;       |DFF_simples:dff0|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff0                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff1|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff1                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff2|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff2                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff3|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff3                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff4|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff4                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff5|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff5                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff6|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff6                                   ; DFF_simples           ; work         ;
+;       |DFF_simples:dff7|                   ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff7                                   ; DFF_simples           ; work         ;
+;    |DFF_simples:reg_error|                 ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF_simples:reg_error                                                         ; DFF_simples           ; work         ;
+;    |DFF_simples:reg_negative|              ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF_simples:reg_negative                                                      ; DFF_simples           ; work         ;
+;    |DFF_simples:reg_overflow|              ; 5 (5)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF_simples:reg_overflow                                                      ; DFF_simples           ; work         ;
+;    |DFF_simples:reg_zero|                  ; 0 (0)               ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DFF_simples:reg_zero                                                          ; DFF_simples           ; work         ;
+;    |DIV8bit:div_module|                    ; 36 (9)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DIV8bit:div_module                                                            ; DIV8bit               ; work         ;
+;       |DIV4bit_practical:div_hh|           ; 10 (10)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_hh                                   ; DIV4bit_practical     ; work         ;
+;       |DIV4bit_practical:div_hl|           ; 10 (10)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_hl                                   ; DIV4bit_practical     ; work         ;
+;       |DIV4bit_practical:div_lh|           ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_lh                                   ; DIV4bit_practical     ; work         ;
+;       |DIV4bit_practical:div_ll|           ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_ll                                   ; DIV4bit_practical     ; work         ;
+;    |FLAGS8bit:flags_detector|              ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|FLAGS8bit:flags_detector                                                      ; FLAGS8bit             ; work         ;
+;    |MULT8bit:mult_module|                  ; 117 (16)            ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module                                                          ; MULT8bit              ; work         ;
+;       |Addition8bit:adder3|                ; 12 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3                                      ; Addition8bit          ; work         ;
+;          |Addition4bit:high_bits|          ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits               ; Addition4bit          ; work         ;
+;             |Rot2Ckt1:bit0|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit0 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit1|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit1 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit2|                ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit2 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit3|                ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit3 ; Rot2Ckt1              ; work         ;
+;          |Addition4bit:low_bits|           ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits                ; Addition4bit          ; work         ;
+;             |Rot2Ckt1:bit1|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit1  ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit2|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit2  ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit3|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit3  ; Rot2Ckt1              ; work         ;
+;       |MULT4bit:mult_hh|                   ; 23 (23)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_hh                                         ; MULT4bit              ; work         ;
+;       |MULT4bit:mult_hl|                   ; 24 (24)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_hl                                         ; MULT4bit              ; work         ;
+;       |MULT4bit:mult_lh|                   ; 21 (21)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_lh                                         ; MULT4bit              ; work         ;
+;       |MULT4bit:mult_ll|                   ; 21 (21)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_ll                                         ; MULT4bit              ; work         ;
+;    |MUX8x8:result_mux|                     ; 60 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MUX8x8:result_mux                                                             ; MUX8x8                ; work         ;
+;       |MUX8x4:mux_high|                    ; 30 (30)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MUX8x8:result_mux|MUX8x4:mux_high                                             ; MUX8x4                ; work         ;
+;       |MUX8x4:mux_low|                     ; 30 (30)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|MUX8x8:result_mux|MUX8x4:mux_low                                              ; MUX8x4                ; work         ;
+;    |SUB8bit:subtrator|                     ; 12 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator                                                             ; SUB8bit               ; work         ;
+;       |Addition8bit:sub_adder|             ; 12 (0)              ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder                                      ; Addition8bit          ; work         ;
+;          |Addition4bit:high_bits|          ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits               ; Addition4bit          ; work         ;
+;             |Rot2Ckt1:bit0|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit0 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit1|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit1 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit2|                ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit2 ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit3|                ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit3 ; Rot2Ckt1              ; work         ;
+;          |Addition4bit:low_bits|           ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits                ; Addition4bit          ; work         ;
+;             |Rot2Ckt1:bit1|                ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit1  ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit2|                ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit2  ; Rot2Ckt1              ; work         ;
+;             |Rot2Ckt1:bit3|                ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit3  ; Rot2Ckt1              ; work         ;
+;    |XOR8bit:xor_module|                    ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|XOR8bit:xor_module                                                            ; XOR8bit               ; work         ;
+;       |XOR4bit:xor_high|                   ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|XOR8bit:xor_module|XOR4bit:xor_high                                           ; XOR4bit               ; work         ;
+;    |contador_estados:contador|             ; 3 (3)               ; 3 (3)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|contador_estados:contador                                                     ; contador_estados      ; work         ;
+;    |debounce:debounce_advance|             ; 0 (0)               ; 3 (3)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|debounce:debounce_advance                                                     ; debounce              ; work         ;
+;    |debounce:debounce_reset|               ; 0 (0)               ; 3 (3)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|debounce:debounce_reset                                                       ; debounce              ; work         ;
+;    |display7seg_OPERADOR:disp_operador|    ; 7 (7)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|display7seg_OPERADOR:disp_operador                                            ; display7seg_OPERADOR  ; work         ;
+;    |main:conversor_display|                ; 135 (0)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display                                                        ; main                  ; work         ;
+;       |binToBcd:convBcd|                   ; 52 (52)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|binToBcd:convBcd                                       ; binToBcd              ; work         ;
+;       |mux4to1:muxC0|                      ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxC1|                      ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxC2|                      ; 1 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 1 (1)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxC3|                      ; 2 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 2 (2)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxC4|                      ; 3 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD0|                      ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 6 (6)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD1|                      ; 7 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 7 (7)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD2|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD3|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD4|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD5|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxD6|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU0|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU1|                      ; 6 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 6 (6)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU2|                      ; 4 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU3|                      ; 8 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 8 (8)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU4|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU5|                      ; 5 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 5 (5)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5|mux2to1:mux3                             ; mux2to1               ; work         ;
+;       |mux4to1:muxU6|                      ; 4 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6                                          ; mux4to1               ; work         ;
+;          |mux2to1:mux3|                    ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6|mux2to1:mux3                             ; mux2to1               ; work         ;
+;    |mux_operando:mux_op|                   ; 8 (8)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|mux_operando:mux_op                                                           ; mux_operando          ; work         ;
+;    |registrador_resultado:reg_resultado|   ; 0 (0)               ; 8 (8)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |ULA8bit_PRINCIPAL|registrador_resultado:reg_resultado                                           ; registrador_resultado ; work         ;
++--------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------+-----------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 44    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 38    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 32    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------+
+; Inverted Register Statistics                         ;
++--------------------------------------------+---------+
+; Inverted Register                          ; Fan out ;
++--------------------------------------------+---------+
+; state_prev[1]                              ; 1       ;
+; state_prev[0]                              ; 1       ;
+; contador_estados:contador|key_advance_prev ; 2       ;
+; Total number of inverted registers = 3     ;         ;
++--------------------------------------------+---------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+; 3:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5|mux2to1:mux3|Or0 ;
+; 10:1               ; 3 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; No         ; |ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6|mux2to1:mux3|Or0 ;
+; 10:1               ; 7 bits    ; 42 LEs        ; 42 LEs               ; 0 LEs                  ; No         ; |ULA8bit_PRINCIPAL|MUX8x8:result_mux|MUX8x4:mux_low|o1_final             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU6" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU5" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU4" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU3" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU2" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU1" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxU0" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD6" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD5" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD4" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD3" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD2" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD1" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxD0" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC6" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC5" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC4" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC3" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC2" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC1" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|mux4to1:muxC0" ;
++------+-------+----------+----------------------------------------+
+; Port ; Type  ; Severity ; Details                                ;
++------+-------+----------+----------------------------------------+
+; D    ; Input ; Info     ; Stuck at VCC                           ;
++------+-------+----------+----------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|binToBcd:convBcd|decoderSaida:dec2" ;
++---------+-------+----------+----------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                  ;
++---------+-------+----------+----------------------------------------------------------+
+; S[3..2] ; Input ; Info     ; Stuck at GND                                             ;
++---------+-------+----------+----------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|binToHex:convHex|decoderSaida:dec2" ;
++------+-------+----------+-------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                     ;
++------+-------+----------+-------------------------------------------------------------+
+; S    ; Input ; Info     ; Stuck at GND                                                ;
++------+-------+----------+-------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec2" ;
++---------+-------+----------+----------------------------------------------------------+
+; Port    ; Type  ; Severity ; Details                                                  ;
++---------+-------+----------+----------------------------------------------------------+
+; S[3..2] ; Input ; Info     ; Stuck at GND                                             ;
++---------+-------+----------+----------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec1" ;
++------+-------+----------+-------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                     ;
++------+-------+----------+-------------------------------------------------------------+
+; S[3] ; Input ; Info     ; Stuck at GND                                                ;
++------+-------+----------+-------------------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "main:conversor_display|binToOct:convOct|decoderSaida:dec0" ;
++------+-------+----------+-------------------------------------------------------------+
+; Port ; Type  ; Severity ; Details                                                     ;
++------+-------+----------+-------------------------------------------------------------+
+; S[3] ; Input ; Info     ; Stuck at GND                                                ;
++------+-------+----------+-------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_hh"                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Error ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_hl"                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Error ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_lh"                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Error ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DIV8bit:div_module|DIV4bit_practical:div_ll"                                         ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Error ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "DIV8bit:div_module"                                                                       ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Remainder  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; Fractional ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------+
+; Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder3" ;
++------+-------+----------+--------------------------------------------+
+; Port ; Type  ; Severity ; Details                                    ;
++------+-------+----------+--------------------------------------------+
+; Cin  ; Input ; Info     ; Stuck at GND                               ;
++------+-------+----------+--------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder2"                                              ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; A[7..4] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; B[3..0] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; Cin     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; Cout    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "MULT8bit:mult_module|Addition8bit:adder1"                                              ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                             ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+; A[7..4] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; B[3..0] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; Cin     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; Cout    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------+
+; Port Connectivity Checks: "SUB8bit:subtrator|Addition8bit:sub_adder" ;
++------+-------+----------+--------------------------------------------+
+; Port ; Type  ; Severity ; Details                                    ;
++------+-------+----------+--------------------------------------------+
+; Cin  ; Input ; Info     ; Stuck at VCC                               ;
++------+-------+----------+--------------------------------------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "Addition8bit:somador" ;
++------+-------+----------+------------------------+
+; Port ; Type  ; Severity ; Details                ;
++------+-------+----------+------------------------+
+; Cin  ; Input ; Info     ; Stuck at GND           ;
++------+-------+----------+------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "registrador_resultado:reg_resultado"                                                ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Q[8] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 50                          ;
+; cycloneiii_ff         ; 44                          ;
+;     CLR               ; 6                           ;
+;     ENA CLR           ; 32                          ;
+;     plain             ; 6                           ;
+; cycloneiii_lcell_comb ; 410                         ;
+;     normal            ; 410                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 45                          ;
+;         3 data inputs ; 82                          ;
+;         4 data inputs ; 278                         ;
+;                       ;                             ;
+; Max LUT depth         ; 14.00                       ;
+; Average LUT depth     ; 7.95                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:03     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.0 Build 711 06/05/2020 SJ Lite Edition
+    Info: Processing started: Mon Nov 03 21:56:55 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off zeuzao -c zeuzao
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file addition4bit.v
+    Info (12023): Found entity 1: Addition4bit File: C:/pblnew/Addition4bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file addition8bit.v
+    Info (12023): Found entity 1: Addition8bit File: C:/pblnew/Addition8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file and4bit.v
+    Info (12023): Found entity 1: AND4bit File: C:/pblnew/AND4bit.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file and8bit.v
+    Info (12023): Found entity 1: AND8bit File: C:/pblnew/AND8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file atualizador_leds.v
+    Info (12023): Found entity 1: atualizador_leds File: C:/pblnew/atualizador_leds.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file contador_estados.v
+    Info (12023): Found entity 1: contador_estados File: C:/pblnew/contador_estados.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file detector_overflow.v
+    Info (12023): Found entity 1: detector_overflow File: C:/pblnew/detector_overflow.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file dff3bit_simples.v
+    Info (12023): Found entity 1: DFF3bit_simples File: C:/pblnew/DFF3bit_simples.v Line: 2
+Warning (12018): Entity "dff" will be ignored because it conflicts with Quartus Prime primitive name File: C:/pblnew/DFF8bit.v Line: 20
+Info (12021): Found 2 design units, including 2 entities, in source file dff8bit.v
+    Info (12023): Found entity 1: DFF8bit File: C:/pblnew/DFF8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file dff8bit_simples.v
+    Info (12023): Found entity 1: DFF8bit_simples File: C:/pblnew/DFF8bit_simples.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file dff_simples.v
+    Info (12023): Found entity 1: DFF_simples File: C:/pblnew/DFF_simples.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file display7seg.v
+    Info (12023): Found entity 1: display7seg File: C:/pblnew/display7seg.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file display7seg_operador.v
+    Info (12023): Found entity 1: display7seg_OPERADOR File: C:/pblnew/display7seg_OPERADOR.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file div4bit.v
+    Info (12023): Found entity 1: DIV4bit File: C:/pblnew/DIV4bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file div4bit_practical.v
+    Info (12023): Found entity 1: DIV4bit_practical File: C:/pblnew/DIV4bit_practical.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file div8bit.v
+    Info (12023): Found entity 1: DIV8bit File: C:/pblnew/DIV8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file flags4bit.v
+    Info (12023): Found entity 1: FLAGS4bit File: C:/pblnew/FLAGS4bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file mult4bit.v
+    Info (12023): Found entity 1: MULT4bit File: C:/pblnew/MULT4bit.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file mult8bit.v
+    Info (12023): Found entity 1: MULT8bit File: C:/pblnew/MULT8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file mux8x4.v
+    Info (12023): Found entity 1: MUX8x4 File: C:/pblnew/MUX8x4.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file mux8x8.v
+    Info (12023): Found entity 1: MUX8x8 File: C:/pblnew/MUX8x8.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file mux_operando.v
+    Info (12023): Found entity 1: mux_operando File: C:/pblnew/mux_operando.v Line: 4
+Info (12021): Found 1 design units, including 1 entities, in source file negative4bit.v
+    Info (12023): Found entity 1: NEGATIVE4bit File: C:/pblnew/NEGATIVE4bit.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file not8bit.v
+    Info (12023): Found entity 1: NOT8bit File: C:/pblnew/NOT8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file or4bit.v
+    Info (12023): Found entity 1: OR4bit File: C:/pblnew/OR4bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file or8bit.v
+    Info (12023): Found entity 1: OR8bit File: C:/pblnew/OR8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file registrador_resultado.v
+    Info (12023): Found entity 1: registrador_resultado File: C:/pblnew/registrador_resultado.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file rot2ckt1.v
+    Info (12023): Found entity 1: Rot2Ckt1 File: C:/pblnew/Rot2Ckt1.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file sub8bit.v
+    Info (12023): Found entity 1: SUB8bit File: C:/pblnew/SUB8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file ula8bit_principal.v
+    Info (12023): Found entity 1: ULA8bit_PRINCIPAL File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file xor4bit.v
+    Info (12023): Found entity 1: XOR4bit File: C:/pblnew/XOR4bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file xor8bit.v
+    Info (12023): Found entity 1: XOR8bit File: C:/pblnew/XOR8bit.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file debounce.v
+    Info (12023): Found entity 1: debounce File: C:/pblnew/debounce.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file flags8bit.v
+    Info (12023): Found entity 1: FLAGS8bit File: C:/pblnew/FLAGS8bit.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file dff2bit_simples.v
+    Info (12023): Found entity 1: DFF2bit_simples File: C:/pblnew/DFF2bit_simples.v Line: 2
+Info (12021): Found 1 design units, including 1 entities, in source file mux4to1.v
+    Info (12023): Found entity 1: mux4to1 File: C:/pblnew/mux4to1.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file mux2to1.v
+    Info (12023): Found entity 1: mux2to1 File: C:/pblnew/mux2to1.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file main.v
+    Info (12023): Found entity 1: main File: C:/pblnew/main.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file decodersaida.v
+    Info (12023): Found entity 1: decoderSaida File: C:/pblnew/decoderSaida.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bintooct.v
+    Info (12023): Found entity 1: binToOct File: C:/pblnew/binToOct.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bintohex.v
+    Info (12023): Found entity 1: binToHex File: C:/pblnew/binToHex.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file bintobcd.v
+    Info (12023): Found entity 1: binToBcd File: C:/pblnew/binToBcd.v Line: 1
+Info (12127): Elaborating entity "ULA8bit_PRINCIPAL" for the top level hierarchy
+Warning (10034): Output port "LEDR[6..4]" at ULA8bit_PRINCIPAL.v(7) has no driver File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 7
+Info (12128): Elaborating entity "debounce" for hierarchy "debounce:debounce_advance" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 58
+Info (12128): Elaborating entity "contador_estados" for hierarchy "contador_estados:contador" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 72
+Info (12128): Elaborating entity "DFF8bit_simples" for hierarchy "DFF8bit_simples:registro_A" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 97
+Info (12128): Elaborating entity "DFF_simples" for hierarchy "DFF8bit_simples:registro_A|DFF_simples:dff0" File: C:/pblnew/DFF8bit_simples.v Line: 11
+Info (12128): Elaborating entity "DFF3bit_simples" for hierarchy "DFF3bit_simples:registro_OP" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 115
+Info (12128): Elaborating entity "DFF2bit_simples" for hierarchy "DFF2bit_simples:registro_sel_exibicao" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 124
+Info (12128): Elaborating entity "registrador_resultado" for hierarchy "registrador_resultado:reg_resultado" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 136
+Info (12128): Elaborating entity "mux_operando" for hierarchy "mux_operando:mux_op" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 156
+Info (12128): Elaborating entity "Addition8bit" for hierarchy "Addition8bit:somador" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 172
+Info (12128): Elaborating entity "Addition4bit" for hierarchy "Addition8bit:somador|Addition4bit:low_bits" File: C:/pblnew/Addition8bit.v Line: 17
+Info (12128): Elaborating entity "Rot2Ckt1" for hierarchy "Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit0" File: C:/pblnew/Addition4bit.v Line: 11
+Info (12128): Elaborating entity "SUB8bit" for hierarchy "SUB8bit:subtrator" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 184
+Info (12128): Elaborating entity "OR8bit" for hierarchy "OR8bit:or_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 194
+Info (12128): Elaborating entity "OR4bit" for hierarchy "OR8bit:or_module|OR4bit:or_low" File: C:/pblnew/OR8bit.v Line: 12
+Info (12128): Elaborating entity "AND8bit" for hierarchy "AND8bit:and_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 204
+Info (12128): Elaborating entity "AND4bit" for hierarchy "AND8bit:and_module|AND4bit:and_low" File: C:/pblnew/AND8bit.v Line: 12
+Info (12128): Elaborating entity "XOR8bit" for hierarchy "XOR8bit:xor_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 214
+Info (12128): Elaborating entity "XOR4bit" for hierarchy "XOR8bit:xor_module|XOR4bit:xor_low" File: C:/pblnew/XOR8bit.v Line: 12
+Info (12128): Elaborating entity "MULT8bit" for hierarchy "MULT8bit:mult_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 226
+Info (12128): Elaborating entity "MULT4bit" for hierarchy "MULT8bit:mult_module|MULT4bit:mult_ll" File: C:/pblnew/MULT8bit.v Line: 23
+Info (12128): Elaborating entity "DIV8bit" for hierarchy "DIV8bit:div_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 240
+Info (12128): Elaborating entity "DIV4bit_practical" for hierarchy "DIV8bit:div_module|DIV4bit_practical:div_ll" File: C:/pblnew/DIV8bit.v Line: 57
+Info (12128): Elaborating entity "NOT8bit" for hierarchy "NOT8bit:not_module" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 249
+Info (12128): Elaborating entity "MUX8x8" for hierarchy "MUX8x8:result_mux" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 265
+Info (12128): Elaborating entity "MUX8x4" for hierarchy "MUX8x8:result_mux|MUX8x4:mux_low" File: C:/pblnew/MUX8x8.v Line: 27
+Info (12128): Elaborating entity "FLAGS8bit" for hierarchy "FLAGS8bit:flags_detector" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 282
+Info (12128): Elaborating entity "main" for hierarchy "main:conversor_display" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 356
+Info (12128): Elaborating entity "binToOct" for hierarchy "main:conversor_display|binToOct:convOct" File: C:/pblnew/main.v Line: 11
+Info (12128): Elaborating entity "decoderSaida" for hierarchy "main:conversor_display|binToOct:convOct|decoderSaida:dec0" File: C:/pblnew/binToOct.v Line: 32
+Info (12128): Elaborating entity "binToHex" for hierarchy "main:conversor_display|binToHex:convHex" File: C:/pblnew/main.v Line: 12
+Info (12128): Elaborating entity "binToBcd" for hierarchy "main:conversor_display|binToBcd:convBcd" File: C:/pblnew/main.v Line: 13
+Info (12128): Elaborating entity "mux4to1" for hierarchy "main:conversor_display|mux4to1:muxC0" File: C:/pblnew/main.v Line: 17
+Info (12128): Elaborating entity "mux2to1" for hierarchy "main:conversor_display|mux4to1:muxC0|mux2to1:mux1" File: C:/pblnew/mux4to1.v Line: 16
+Info (12128): Elaborating entity "display7seg_OPERADOR" for hierarchy "display7seg_OPERADOR:disp_operador" File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 366
+Info (13014): Ignored 36 buffer(s)
+    Info (13019): Ignored 36 SOFT buffer(s)
+Info (13000): Registers with preset signals will power-up high File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 80
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "LEDR[4]" is stuck at GND File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 7
+    Warning (13410): Pin "LEDR[5]" is stuck at GND File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 7
+    Warning (13410): Pin "LEDR[6]" is stuck at GND File: C:/pblnew/ULA8bit_PRINCIPAL.v Line: 7
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 493 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 13 input pins
+    Info (21059): Implemented 37 output pins
+    Info (21061): Implemented 443 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 4788 megabytes
+    Info: Processing ended: Mon Nov 03 21:57:09 2025
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:21
+
+

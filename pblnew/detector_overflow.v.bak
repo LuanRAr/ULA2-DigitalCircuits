@@ -1,0 +1,44 @@
+// Detector de overflow para ULA 8 bits
+// Detecta overflow em todas as operações
+module detector_overflow(
+    input  [2:0] op,           // Operação (3 bits)
+    input  [7:0] A,            // Primeiro operando
+    input  [7:0] B,            // Segundo operando
+    input        Cin,          // Carry in (para soma/subtração)
+    input        sum_cout,     // Cout da soma
+    input        sub_borrow,   // Borrow da subtração
+    input        mult_overflow,// Overflow da multiplicação
+    input        div_error,    // Erro da divisão
+    output       overflow      // Flag de overflow
+);
+
+    reg overflow_reg;
+    
+    always @(*) begin
+        case (op)
+            3'b000: // SOMA
+                overflow_reg = sum_cout;
+                
+            3'b001: // SUBTRAÇÃO
+                overflow_reg = sub_borrow;
+                
+            3'b010, // OR
+            3'b011, // AND  
+            3'b100, // XOR
+            3'b111: // NOT
+                overflow_reg = 1'b0; // Operações lógicas não têm overflow
+                
+            3'b101: // MULTIPLICAÇÃO
+                overflow_reg = mult_overflow;
+                
+            3'b110: // DIVISÃO
+                overflow_reg = div_error;
+                
+            default:
+                overflow_reg = 1'b0;
+        endcase
+    end
+    
+    assign overflow = overflow_reg;
+
+endmodule

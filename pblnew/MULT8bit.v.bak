@@ -1,0 +1,107 @@
+// Módulo de multiplicação de 8 bits usando módulos de 4 bits
+module MULT8bit(
+    input  [7:0] A, B,
+    output [7:0] Result,
+    output       Overflow
+);
+    
+    // Sinais intermediários
+    wire [3:0] mult_low_low, mult_low_high, mult_high_low, mult_high_high;
+    wire [3:0] overflow_low_low, overflow_low_high, overflow_high_low, overflow_high_high;
+    wire [7:0] partial_sum1, partial_sum2, final_sum;
+    wire [7:0] carry1, carry2, final_carry;
+    
+    // -----------------------------
+    // 1) Multiplicações de 4 bits
+    // -----------------------------
+    // A[3:0] × B[3:0] (parte baixa)
+    MULT4bit mult_ll(
+        .A(A[3:0]),
+        .B(B[3:0]),
+        .Result(mult_low_low),
+        .Overflow(overflow_low_low[0])
+    );
+    
+    // A[3:0] × B[7:4] (parte baixa × parte alta)
+    MULT4bit mult_lh(
+        .A(A[3:0]),
+        .B(B[7:4]),
+        .Result(mult_low_high),
+        .Overflow(overflow_low_high[0])
+    );
+    
+    // A[7:4] × B[3:0] (parte alta × parte baixa)
+    MULT4bit mult_hl(
+        .A(A[7:4]),
+        .B(B[3:0]),
+        .Result(mult_high_low),
+        .Overflow(overflow_high_low[0])
+    );
+    
+    // A[7:4] × B[7:4] (parte alta)
+    MULT4bit mult_hh(
+        .A(A[7:4]),
+        .B(B[7:4]),
+        .Result(mult_high_high),
+        .Overflow(overflow_high_high[0])
+    );
+    
+    // -----------------------------
+    // 2) Primeira etapa de soma
+    // -----------------------------
+    // Soma: (A[3:0] × B[3:0]) + (A[3:0] × B[7:4] << 4)
+    wire [7:0] shifted_low_high;
+    assign shifted_low_high = {mult_low_high, 4'b0000};
+    
+    Addition8bit adder1(
+        .A({4'b0000, mult_low_low}),
+        .B(shifted_low_high),
+        .Cin(1'b0),
+        .Sum(partial_sum1),
+        .Cout(carry1[0])
+    );
+    
+    // -----------------------------
+    // 3) Segunda etapa de soma
+    // -----------------------------
+    // Soma: (A[7:4] × B[3:0] << 4) + (A[7:4] × B[7:4] << 8)
+    wire [7:0] shifted_high_low, shifted_high_high;
+    assign shifted_high_low = {4'b0000, mult_high_low};
+    assign shifted_high_high = {mult_high_high, 4'b0000};
+    
+    Addition8bit adder2(
+        .A(shifted_high_low),
+        .B(shifted_high_high),
+        .Cin(1'b0),
+        .Sum(partial_sum2),
+        .Cout(carry2[0])
+    );
+    
+    // -----------------------------
+    // 4) Terceira etapa de soma (resultado final)
+    // -----------------------------
+    Addition8bit adder3(
+        .A(partial_sum1),
+        .B(partial_sum2),
+        .Cin(1'b0),
+        .Sum(final_sum),
+        .Cout(final_carry[0])
+    );
+    
+    // -----------------------------
+    // 5) Resultado e detecção de overflow
+    // -----------------------------
+    assign Result = final_sum;
+    
+    // Overflow ocorre se:
+    // - Há carry final
+    // - Qualquer multiplicação de 4 bits teve overflow
+    // - O resultado excede 8 bits
+    wire overflow_condition;
+    wire overflow_any;
+    or or_overflow_any(overflow_any, overflow_low_low[0], overflow_low_high[0], 
+                       overflow_high_low[0], overflow_high_high[0]);
+    or or_overflow_final(overflow_condition, final_carry[0], overflow_any);
+    assign Overflow = overflow_condition;
+    
+endmodule

@@ -1,0 +1,167 @@
+// Módulo de divisão de 8 bits usando módulos de 4 bits
+module DIV8bit(
+    input  [7:0] A, B,
+    output [7:0] Quotient,
+    output [7:0] Remainder,
+    output       Error,
+    output       Fractional
+);
+    
+    // Sinais intermediários
+    wire [3:0] div_low_low_q, div_low_low_r;
+    wire [3:0] div_low_high_q, div_low_high_r;
+    wire [3:0] div_high_low_q, div_high_low_r;
+    wire [3:0] div_high_high_q, div_high_high_r;
+    wire [3:0] error_low_low, error_low_high, error_high_low, error_high_high;
+    wire [3:0] fractional_low_low, fractional_low_high, fractional_high_low, fractional_high_high;
+    
+    // Sinais de controle
+    wire B_low_zero, B_high_zero, B_low_supported, B_high_supported;
+    wire use_low_div, use_high_div;
+    
+    // -----------------------------
+    // 1) Detecção de divisão por zero
+    // -----------------------------
+    wire nB0, nB1, nB2, nB3, nB4, nB5, nB6, nB7;
+    not inv_b0(nB0, B[0]);
+    not inv_b1(nB1, B[1]);
+    not inv_b2(nB2, B[2]);
+    not inv_b3(nB3, B[3]);
+    not inv_b4(nB4, B[4]);
+    not inv_b5(nB5, B[5]);
+    not inv_b6(nB6, B[6]);
+    not inv_b7(nB7, B[7]);
+    
+    // B[3:0] == 0?
+    and and_b_low_zero(B_low_zero, nB0, nB1, nB2, nB3);
+    // B[7:4] == 0?
+    and and_b_high_zero(B_high_zero, nB4, nB5, nB6, nB7);
+    
+    // B == 0 (ambos os nibbles são zero)
+    wire B_zero;
+    and and_b_zero(B_zero, B_low_zero, B_high_zero);
+    assign Error = B_zero;
+    
+    // -----------------------------
+    // 2) Divisões de 4 bits
+    // -----------------------------
+    
+    // A[3:0] ÷ B[3:0] (parte baixa)
+    DIV4bit_practical div_ll(
+        .A(A[3:0]),
+        .B(B[3:0]),
+        .Quotient(div_low_low_q),
+        .Remainder(div_low_low_r),
+        .Error(error_low_low[0]),
+        .Fractional(fractional_low_low[0])
+    );
+    
+    // A[3:0] ÷ B[7:4] (parte baixa ÷ parte alta)
+    DIV4bit_practical div_lh(
+        .A(A[3:0]),
+        .B(B[7:4]),
+        .Quotient(div_low_high_q),
+        .Remainder(div_low_high_r),
+        .Error(error_low_high[0]),
+        .Fractional(fractional_low_high[0])
+    );
+    
+    // A[7:4] ÷ B[3:0] (parte alta ÷ parte baixa)
+    DIV4bit_practical div_hl(
+        .A(A[7:4]),
+        .B(B[3:0]),
+        .Quotient(div_high_low_q),
+        .Remainder(div_high_low_r),
+        .Error(error_high_low[0]),
+        .Fractional(fractional_high_low[0])
+    );
+    
+    // A[7:4] ÷ B[7:4] (parte alta)
+    DIV4bit_practical div_hh(
+        .A(A[7:4]),
+        .B(B[7:4]),
+        .Quotient(div_high_high_q),
+        .Remainder(div_high_high_r),
+        .Error(error_high_high[0]),
+        .Fractional(fractional_high_high[0])
+    );
+    
+    // -----------------------------
+    // 3) Lógica de seleção do resultado, ta dando algum bug - REVER 
+    // -----------------------------
+    
+    // Prioridade: divisão por parte baixa se B[3:0] != 0
+    wire not_B_low_zero;
+    not inv_b_low_zero(not_B_low_zero, B_low_zero);
+    assign use_low_div = not_B_low_zero;
+    
+    // Usar divisão por parte alta se B[3:0] == 0 mas B[7:4] != 0
+    wire not_B_high_zero;
+    not inv_b_high_zero(not_B_high_zero, B_high_zero);
+    wire use_high_div_temp;
+    and and_use_high(use_high_div_temp, B_low_zero, not_B_high_zero);
+    assign use_high_div = use_high_div_temp;
+    
+    // -----------------------------
+    // 4) Seleção do qiociente
+    // -----------------------------
+    
+    // Quociente baixo (bits 3:0)
+    wire [3:0] q_low_sel;
+    wire [3:0] q_low_low, q_low_high;
+    
+    // Se usar divisão por parte baixa
+    assign q_low_low = div_low_low_q;
+    assign q_low_high = div_low_high_q;
+    
+    // MUX para seleção
+    wire q_low_sel_bit;
+    or or_q_low_sel(q_low_sel_bit, use_low_div, use_high_div);
+    
+    // Quociente alto (bits 7:4)
+    wire [3:0] q_high_sel;
+    wire [3:0] q_high_low, q_high_high;
+    
+    // Se usar divisão por parte baixa
+    assign q_high_low = div_high_low_q;
+    assign q_high_high = div_high_high_q;
+    
+    // -----------------------------
+    // 5) Seleção do resto
+    // -----------------------------
+    
+    // Resto baixo (bits 3:0)
+    wire [3:0] r_low_sel;
+    wire [3:0] r_low_low, r_low_high;
+    
+    // Se usar divisão por parte baixa
+    assign r_low_low = div_low_low_r;
+    assign r_low_high = div_low_high_r;
+    
+    // Resto alto (bits 7:4)
+    wire [3:0] r_high_sel;
+    wire [3:0] r_high_low, r_high_high;
+    
+    // Se usar divisão por parte baixa
+    assign r_high_low = div_high_low_r;
+    assign r_high_high = div_high_high_r;
+    
+    // -----------------------------
+    // 6) Resultado final
+    // -----------------------------
+    
+    // Quociente final
+    assign Quotient[3:0] = use_low_div ? q_low_low : (use_high_div ? q_low_high : 4'b0000);
+    assign Quotient[7:4] = use_low_div ? q_high_low : (use_high_div ? q_high_high : 4'b0000);
+    
+    // Resto final
+    assign Remainder[3:0] = use_low_div ? r_low_low : (use_high_div ? r_low_high : 4'b0000);
+    assign Remainder[7:4] = use_low_div ? r_high_low : (use_high_div ? r_high_high : 4'b0000);
+    
+    // Flag Fractional
+    wire fractional_any;
+    or or_fractional(fractional_any, fractional_low_low[0], fractional_low_high[0], 
+                    fractional_high_low[0], fractional_high_high[0]);
+    assign Fractional = fractional_any & ~B_zero;
+
+endmodule

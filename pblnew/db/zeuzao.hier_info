@@ -1,0 +1,4846 @@
+|ULA8bit_PRINCIPAL
+CLOCK_50 => CLOCK_50.IN12
+SW[0] => SW[0].IN2
+SW[1] => SW[1].IN2
+SW[2] => SW[2].IN2
+SW[3] => SW[3].IN2
+SW[4] => SW[4].IN2
+SW[5] => SW[5].IN3
+SW[6] => SW[6].IN3
+SW[7] => SW[7].IN3
+KEY[0] => KEY[0].IN1
+KEY[1] => KEY[1].IN1
+Exib[0] => exibicao[0].IN1
+Exib[1] => exibicao[1].IN1
+LEDR[0] << DFF_simples:reg_zero.q
+LEDR[1] << DFF_simples:reg_overflow.q
+LEDR[2] << DFF_simples:reg_negative.q
+LEDR[3] << DFF_simples:reg_error.q
+LEDR[4] << <GND>
+LEDR[5] << <GND>
+LEDR[6] << <GND>
+LEDR[7] << contador_estados:contador.q
+LEDR[8] << contador_estados:contador.q
+HEX0[0] << main:conversor_display.segmentsUn
+HEX0[1] << main:conversor_display.segmentsUn
+HEX0[2] << main:conversor_display.segmentsUn
+HEX0[3] << main:conversor_display.segmentsUn
+HEX0[4] << main:conversor_display.segmentsUn
+HEX0[5] << main:conversor_display.segmentsUn
+HEX0[6] << main:conversor_display.segmentsUn
+HEX1[0] << main:conversor_display.segmentsDez
+HEX1[1] << main:conversor_display.segmentsDez
+HEX1[2] << main:conversor_display.segmentsDez
+HEX1[3] << main:conversor_display.segmentsDez
+HEX1[4] << main:conversor_display.segmentsDez
+HEX1[5] << main:conversor_display.segmentsDez
+HEX1[6] << main:conversor_display.segmentsDez
+HEX2[0] << main:conversor_display.segmentsCen
+HEX2[1] << main:conversor_display.segmentsCen
+HEX2[2] << main:conversor_display.segmentsCen
+HEX2[3] << main:conversor_display.segmentsCen
+HEX2[4] << main:conversor_display.segmentsCen
+HEX2[5] << main:conversor_display.segmentsCen
+HEX2[6] << main:conversor_display.segmentsCen
+seg_display_operador[0] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[1] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[2] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[3] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[4] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[5] << display7seg_OPERADOR:disp_operador.seg
+seg_display_operador[6] << display7seg_OPERADOR:disp_operador.seg
+
+
+|ULA8bit_PRINCIPAL|debounce:debounce_advance
+clk => ff3.CLK
+clk => ff2.CLK
+clk => ff1.CLK
+btn_in => ff1.DATAIN
+btn_out <= ff3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|debounce:debounce_reset
+clk => ff3.CLK
+clk => ff2.CLK
+clk => ff1.CLK
+btn_in => ff1.DATAIN
+btn_out <= ff3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|contador_estados:contador
+clk_btn => key_advance_prev.CLK
+clk_btn => q[0]~reg0.CLK
+clk_btn => q[1]~reg0.CLK
+rst_n_btn => key_advance_prev.PRESET
+rst_n_btn => q[0]~reg0.ACLR
+rst_n_btn => q[1]~reg0.ACLR
+key_advance => key_advance_prev.DATAIN
+key_advance => key_advance_edge.IN1
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A
+D[0] => D[0].IN1
+D[1] => D[1].IN1
+D[2] => D[2].IN1
+D[3] => D[3].IN1
+D[4] => D[4].IN1
+D[5] => D[5].IN1
+D[6] => D[6].IN1
+D[7] => D[7].IN1
+clk => clk.IN8
+rst => rst.IN8
+en => en.IN8
+Q[0] <= DFF_simples:dff0.q
+Q[1] <= DFF_simples:dff1.q
+Q[2] <= DFF_simples:dff2.q
+Q[3] <= DFF_simples:dff3.q
+Q[4] <= DFF_simples:dff4.q
+Q[5] <= DFF_simples:dff5.q
+Q[6] <= DFF_simples:dff6.q
+Q[7] <= DFF_simples:dff7.q
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff0
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff1
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff2
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff3
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff4
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff5
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff6
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_A|DFF_simples:dff7
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B
+D[0] => D[0].IN1
+D[1] => D[1].IN1
+D[2] => D[2].IN1
+D[3] => D[3].IN1
+D[4] => D[4].IN1
+D[5] => D[5].IN1
+D[6] => D[6].IN1
+D[7] => D[7].IN1
+clk => clk.IN8
+rst => rst.IN8
+en => en.IN8
+Q[0] <= DFF_simples:dff0.q
+Q[1] <= DFF_simples:dff1.q
+Q[2] <= DFF_simples:dff2.q
+Q[3] <= DFF_simples:dff3.q
+Q[4] <= DFF_simples:dff4.q
+Q[5] <= DFF_simples:dff5.q
+Q[6] <= DFF_simples:dff6.q
+Q[7] <= DFF_simples:dff7.q
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff0
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff1
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff2
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff3
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff4
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff5
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff6
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF8bit_simples:registro_B|DFF_simples:dff7
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP
+D[0] => D[0].IN1
+D[1] => D[1].IN1
+D[2] => D[2].IN1
+clk => clk.IN3
+rst => rst.IN3
+en => en.IN3
+Q[0] <= DFF_simples:dff0.q
+Q[1] <= DFF_simples:dff1.q
+Q[2] <= DFF_simples:dff2.q
+
+
+|ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff0
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff1
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF3bit_simples:registro_OP|DFF_simples:dff2
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao
+D[0] => D[0].IN1
+D[1] => D[1].IN1
+clk => clk.IN2
+rst => rst.IN2
+en => en.IN2
+Q[0] <= DFF_simples:dff0.q
+Q[1] <= DFF_simples:dff1.q
+
+
+|ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao|DFF_simples:dff0
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF2bit_simples:registro_sel_exibicao|DFF_simples:dff1
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|registrador_resultado:reg_resultado
+resultado[0] => Q_reg[0].DATAIN
+resultado[1] => Q_reg[1].DATAIN
+resultado[2] => Q_reg[2].DATAIN
+resultado[3] => Q_reg[3].DATAIN
+resultado[4] => Q_reg[4].DATAIN
+resultado[5] => Q_reg[5].DATAIN
+resultado[6] => Q_reg[6].DATAIN
+resultado[7] => Q_reg[7].DATAIN
+overflow => Q_reg[8].DATAIN
+clk => Q_reg[0].CLK
+clk => Q_reg[1].CLK
+clk => Q_reg[2].CLK
+clk => Q_reg[3].CLK
+clk => Q_reg[4].CLK
+clk => Q_reg[5].CLK
+clk => Q_reg[6].CLK
+clk => Q_reg[7].CLK
+clk => Q_reg[8].CLK
+rst => Q_reg[0].ACLR
+rst => Q_reg[1].ACLR
+rst => Q_reg[2].ACLR
+rst => Q_reg[3].ACLR
+rst => Q_reg[4].ACLR
+rst => Q_reg[5].ACLR
+rst => Q_reg[6].ACLR
+rst => Q_reg[7].ACLR
+rst => Q_reg[8].ACLR
+en => Q_reg[0].ENA
+en => Q_reg[8].ENA
+en => Q_reg[7].ENA
+en => Q_reg[6].ENA
+en => Q_reg[5].ENA
+en => Q_reg[4].ENA
+en => Q_reg[3].ENA
+en => Q_reg[2].ENA
+en => Q_reg[1].ENA
+Q[0] <= Q_reg[0].DB_MAX_OUTPUT_PORT_TYPE
+Q[1] <= Q_reg[1].DB_MAX_OUTPUT_PORT_TYPE
+Q[2] <= Q_reg[2].DB_MAX_OUTPUT_PORT_TYPE
+Q[3] <= Q_reg[3].DB_MAX_OUTPUT_PORT_TYPE
+Q[4] <= Q_reg[4].DB_MAX_OUTPUT_PORT_TYPE
+Q[5] <= Q_reg[5].DB_MAX_OUTPUT_PORT_TYPE
+Q[6] <= Q_reg[6].DB_MAX_OUTPUT_PORT_TYPE
+Q[7] <= Q_reg[7].DB_MAX_OUTPUT_PORT_TYPE
+Q[8] <= Q_reg[8].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|mux_operando:mux_op
+A[0] => out.DATAA
+A[1] => out.DATAA
+A[2] => out.DATAA
+A[3] => out.DATAA
+A[4] => out.DATAA
+A[5] => out.DATAA
+A[6] => out.DATAA
+A[7] => out.DATAA
+resultado_anterior[0] => out.DATAB
+resultado_anterior[1] => out.DATAB
+resultado_anterior[2] => out.DATAB
+resultado_anterior[3] => out.DATAB
+resultado_anterior[4] => out.DATAB
+resultado_anterior[5] => out.DATAB
+resultado_anterior[6] => out.DATAB
+resultado_anterior[7] => out.DATAB
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+sel => out.OUTPUTSELECT
+out[0] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[4] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[5] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[6] <= out.DB_MAX_OUTPUT_PORT_TYPE
+out[7] <= out.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Cin => Cin.IN1
+Sum[0] <= Addition4bit:low_bits.Sum
+Sum[1] <= Addition4bit:low_bits.Sum
+Sum[2] <= Addition4bit:low_bits.Sum
+Sum[3] <= Addition4bit:low_bits.Sum
+Sum[4] <= Addition4bit:high_bits.Sum
+Sum[5] <= Addition4bit:high_bits.Sum
+Sum[6] <= Addition4bit:high_bits.Sum
+Sum[7] <= Addition4bit:high_bits.Sum
+Cout <= Addition4bit:high_bits.Cout
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:low_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|Addition8bit:somador|Addition4bit:high_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => notB[0].IN1
+B[1] => notB[1].IN1
+B[2] => notB[2].IN1
+B[3] => notB[3].IN1
+B[4] => notB[4].IN1
+B[5] => notB[5].IN1
+B[6] => notB[6].IN1
+B[7] => notB[7].IN1
+Result[0] <= Addition8bit:sub_adder.Sum
+Result[1] <= Addition8bit:sub_adder.Sum
+Result[2] <= Addition8bit:sub_adder.Sum
+Result[3] <= Addition8bit:sub_adder.Sum
+Result[4] <= Addition8bit:sub_adder.Sum
+Result[5] <= Addition8bit:sub_adder.Sum
+Result[6] <= Addition8bit:sub_adder.Sum
+Result[7] <= Addition8bit:sub_adder.Sum
+Borrow <= Addition8bit:sub_adder.Cout
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Cin => Cin.IN1
+Sum[0] <= Addition4bit:low_bits.Sum
+Sum[1] <= Addition4bit:low_bits.Sum
+Sum[2] <= Addition4bit:low_bits.Sum
+Sum[3] <= Addition4bit:low_bits.Sum
+Sum[4] <= Addition4bit:high_bits.Sum
+Sum[5] <= Addition4bit:high_bits.Sum
+Sum[6] <= Addition4bit:high_bits.Sum
+Sum[7] <= Addition4bit:high_bits.Sum
+Cout <= Addition4bit:high_bits.Cout
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:low_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|SUB8bit:subtrator|Addition8bit:sub_adder|Addition4bit:high_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|OR8bit:or_module
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Result[0] <= OR4bit:or_low.Result
+Result[1] <= OR4bit:or_low.Result
+Result[2] <= OR4bit:or_low.Result
+Result[3] <= OR4bit:or_low.Result
+Result[4] <= OR4bit:or_high.Result
+Result[5] <= OR4bit:or_high.Result
+Result[6] <= OR4bit:or_high.Result
+Result[7] <= OR4bit:or_high.Result
+
+
+|ULA8bit_PRINCIPAL|OR8bit:or_module|OR4bit:or_low
+A[0] => or0.IN0
+A[1] => or1.IN0
+A[2] => or2.IN0
+A[3] => or3.IN0
+B[0] => or0.IN1
+B[1] => or1.IN1
+B[2] => or2.IN1
+B[3] => or3.IN1
+Result[0] <= or0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= or1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= or2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= or3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|OR8bit:or_module|OR4bit:or_high
+A[0] => or0.IN0
+A[1] => or1.IN0
+A[2] => or2.IN0
+A[3] => or3.IN0
+B[0] => or0.IN1
+B[1] => or1.IN1
+B[2] => or2.IN1
+B[3] => or3.IN1
+Result[0] <= or0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= or1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= or2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= or3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|AND8bit:and_module
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Result[0] <= AND4bit:and_low.Result
+Result[1] <= AND4bit:and_low.Result
+Result[2] <= AND4bit:and_low.Result
+Result[3] <= AND4bit:and_low.Result
+Result[4] <= AND4bit:and_high.Result
+Result[5] <= AND4bit:and_high.Result
+Result[6] <= AND4bit:and_high.Result
+Result[7] <= AND4bit:and_high.Result
+
+
+|ULA8bit_PRINCIPAL|AND8bit:and_module|AND4bit:and_low
+A[0] => and0.IN0
+A[1] => and1.IN0
+A[2] => and2.IN0
+A[3] => and3.IN0
+B[0] => and0.IN1
+B[1] => and1.IN1
+B[2] => and2.IN1
+B[3] => and3.IN1
+Result[0] <= and0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= and1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= and2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= and3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|AND8bit:and_module|AND4bit:and_high
+A[0] => and0.IN0
+A[1] => and1.IN0
+A[2] => and2.IN0
+A[3] => and3.IN0
+B[0] => and0.IN1
+B[1] => and1.IN1
+B[2] => and2.IN1
+B[3] => and3.IN1
+Result[0] <= and0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= and1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= and2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= and3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|XOR8bit:xor_module
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Result[0] <= XOR4bit:xor_low.Result
+Result[1] <= XOR4bit:xor_low.Result
+Result[2] <= XOR4bit:xor_low.Result
+Result[3] <= XOR4bit:xor_low.Result
+Result[4] <= XOR4bit:xor_high.Result
+Result[5] <= XOR4bit:xor_high.Result
+Result[6] <= XOR4bit:xor_high.Result
+Result[7] <= XOR4bit:xor_high.Result
+
+
+|ULA8bit_PRINCIPAL|XOR8bit:xor_module|XOR4bit:xor_low
+A[0] => xor0.IN0
+A[1] => xor1.IN0
+A[2] => xor2.IN0
+A[3] => xor3.IN0
+B[0] => xor0.IN1
+B[1] => xor1.IN1
+B[2] => xor2.IN1
+B[3] => xor3.IN1
+Result[0] <= xor0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= xor1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= xor2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= xor3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|XOR8bit:xor_module|XOR4bit:xor_high
+A[0] => xor0.IN0
+A[1] => xor1.IN0
+A[2] => xor2.IN0
+A[3] => xor3.IN0
+B[0] => xor0.IN1
+B[1] => xor1.IN1
+B[2] => xor2.IN1
+B[3] => xor3.IN1
+Result[0] <= xor0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= xor1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= xor2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= xor3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+A[4] => A[4].IN2
+A[5] => A[5].IN2
+A[6] => A[6].IN2
+A[7] => A[7].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+B[4] => B[4].IN2
+B[5] => B[5].IN2
+B[6] => B[6].IN2
+B[7] => B[7].IN2
+Result[0] <= Addition8bit:adder3.Sum
+Result[1] <= Addition8bit:adder3.Sum
+Result[2] <= Addition8bit:adder3.Sum
+Result[3] <= Addition8bit:adder3.Sum
+Result[4] <= Addition8bit:adder3.Sum
+Result[5] <= Addition8bit:adder3.Sum
+Result[6] <= Addition8bit:adder3.Sum
+Result[7] <= Addition8bit:adder3.Sum
+Overflow <= or_overflow_final.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_ll
+A[0] => and00.IN0
+A[0] => and01.IN0
+A[0] => and02.IN0
+A[0] => and03.IN0
+A[1] => and10.IN0
+A[1] => and11.IN0
+A[1] => and12.IN0
+A[1] => and13.IN0
+A[2] => and20.IN0
+A[2] => and21.IN0
+A[2] => and22.IN0
+A[3] => and30.IN0
+A[3] => and31.IN0
+B[0] => and00.IN1
+B[0] => and10.IN1
+B[0] => and20.IN1
+B[0] => and30.IN1
+B[1] => and01.IN1
+B[1] => and11.IN1
+B[1] => and21.IN1
+B[1] => and31.IN1
+B[2] => and02.IN1
+B[2] => and12.IN1
+B[2] => and22.IN1
+B[3] => and03.IN1
+B[3] => and13.IN1
+Result[0] <= res0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= res1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= res2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= res3.DB_MAX_OUTPUT_PORT_TYPE
+Overflow <= ov_or8.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_lh
+A[0] => and00.IN0
+A[0] => and01.IN0
+A[0] => and02.IN0
+A[0] => and03.IN0
+A[1] => and10.IN0
+A[1] => and11.IN0
+A[1] => and12.IN0
+A[1] => and13.IN0
+A[2] => and20.IN0
+A[2] => and21.IN0
+A[2] => and22.IN0
+A[3] => and30.IN0
+A[3] => and31.IN0
+B[0] => and00.IN1
+B[0] => and10.IN1
+B[0] => and20.IN1
+B[0] => and30.IN1
+B[1] => and01.IN1
+B[1] => and11.IN1
+B[1] => and21.IN1
+B[1] => and31.IN1
+B[2] => and02.IN1
+B[2] => and12.IN1
+B[2] => and22.IN1
+B[3] => and03.IN1
+B[3] => and13.IN1
+Result[0] <= res0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= res1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= res2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= res3.DB_MAX_OUTPUT_PORT_TYPE
+Overflow <= ov_or8.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_hl
+A[0] => and00.IN0
+A[0] => and01.IN0
+A[0] => and02.IN0
+A[0] => and03.IN0
+A[1] => and10.IN0
+A[1] => and11.IN0
+A[1] => and12.IN0
+A[1] => and13.IN0
+A[2] => and20.IN0
+A[2] => and21.IN0
+A[2] => and22.IN0
+A[3] => and30.IN0
+A[3] => and31.IN0
+B[0] => and00.IN1
+B[0] => and10.IN1
+B[0] => and20.IN1
+B[0] => and30.IN1
+B[1] => and01.IN1
+B[1] => and11.IN1
+B[1] => and21.IN1
+B[1] => and31.IN1
+B[2] => and02.IN1
+B[2] => and12.IN1
+B[2] => and22.IN1
+B[3] => and03.IN1
+B[3] => and13.IN1
+Result[0] <= res0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= res1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= res2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= res3.DB_MAX_OUTPUT_PORT_TYPE
+Overflow <= ov_or8.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|MULT4bit:mult_hh
+A[0] => and00.IN0
+A[0] => and01.IN0
+A[0] => and02.IN0
+A[0] => and03.IN0
+A[1] => and10.IN0
+A[1] => and11.IN0
+A[1] => and12.IN0
+A[1] => and13.IN0
+A[2] => and20.IN0
+A[2] => and21.IN0
+A[2] => and22.IN0
+A[3] => and30.IN0
+A[3] => and31.IN0
+B[0] => and00.IN1
+B[0] => and10.IN1
+B[0] => and20.IN1
+B[0] => and30.IN1
+B[1] => and01.IN1
+B[1] => and11.IN1
+B[1] => and21.IN1
+B[1] => and31.IN1
+B[2] => and02.IN1
+B[2] => and12.IN1
+B[2] => and22.IN1
+B[3] => and03.IN1
+B[3] => and13.IN1
+Result[0] <= res0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= res1.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= res2.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= res3.DB_MAX_OUTPUT_PORT_TYPE
+Overflow <= ov_or8.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Cin => Cin.IN1
+Sum[0] <= Addition4bit:low_bits.Sum
+Sum[1] <= Addition4bit:low_bits.Sum
+Sum[2] <= Addition4bit:low_bits.Sum
+Sum[3] <= Addition4bit:low_bits.Sum
+Sum[4] <= Addition4bit:high_bits.Sum
+Sum[5] <= Addition4bit:high_bits.Sum
+Sum[6] <= Addition4bit:high_bits.Sum
+Sum[7] <= Addition4bit:high_bits.Sum
+Cout <= Addition4bit:high_bits.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:low_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:low_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:low_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:low_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:low_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:high_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:high_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:high_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:high_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder1|Addition4bit:high_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Cin => Cin.IN1
+Sum[0] <= Addition4bit:low_bits.Sum
+Sum[1] <= Addition4bit:low_bits.Sum
+Sum[2] <= Addition4bit:low_bits.Sum
+Sum[3] <= Addition4bit:low_bits.Sum
+Sum[4] <= Addition4bit:high_bits.Sum
+Sum[5] <= Addition4bit:high_bits.Sum
+Sum[6] <= Addition4bit:high_bits.Sum
+Sum[7] <= Addition4bit:high_bits.Sum
+Cout <= Addition4bit:high_bits.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:low_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:low_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:low_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:low_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:low_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:high_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:high_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:high_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:high_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder2|Addition4bit:high_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+A[4] => A[4].IN1
+A[5] => A[5].IN1
+A[6] => A[6].IN1
+A[7] => A[7].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+B[4] => B[4].IN1
+B[5] => B[5].IN1
+B[6] => B[6].IN1
+B[7] => B[7].IN1
+Cin => Cin.IN1
+Sum[0] <= Addition4bit:low_bits.Sum
+Sum[1] <= Addition4bit:low_bits.Sum
+Sum[2] <= Addition4bit:low_bits.Sum
+Sum[3] <= Addition4bit:low_bits.Sum
+Sum[4] <= Addition4bit:high_bits.Sum
+Sum[5] <= Addition4bit:high_bits.Sum
+Sum[6] <= Addition4bit:high_bits.Sum
+Sum[7] <= Addition4bit:high_bits.Sum
+Cout <= Addition4bit:high_bits.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:low_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits
+A[0] => A[0].IN1
+A[1] => A[1].IN1
+A[2] => A[2].IN1
+A[3] => A[3].IN1
+B[0] => B[0].IN1
+B[1] => B[1].IN1
+B[2] => B[2].IN1
+B[3] => B[3].IN1
+Cin => Cin.IN1
+Sum[0] <= Rot2Ckt1:bit0.S
+Sum[1] <= Rot2Ckt1:bit1.S
+Sum[2] <= Rot2Ckt1:bit2.S
+Sum[3] <= Rot2Ckt1:bit3.S
+Cout <= Rot2Ckt1:bit3.Cout
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit0
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit1
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit2
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|MULT8bit:mult_module|Addition8bit:adder3|Addition4bit:high_bits|Rot2Ckt1:bit3
+S <= Xor1.DB_MAX_OUTPUT_PORT_TYPE
+Cout <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+A => Xor0.IN0
+A => And0.IN0
+B => Xor0.IN1
+B => And0.IN1
+Cin => And1.IN1
+Cin => Xor1.IN1
+
+
+|ULA8bit_PRINCIPAL|DIV8bit:div_module
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+A[4] => A[4].IN2
+A[5] => A[5].IN2
+A[6] => A[6].IN2
+A[7] => A[7].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+B[4] => B[4].IN2
+B[5] => B[5].IN2
+B[6] => B[6].IN2
+B[7] => B[7].IN2
+Quotient[0] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[1] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[2] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[3] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[4] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[5] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[6] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[7] <= Quotient.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[0] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[1] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[2] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[3] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[4] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[5] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[6] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[7] <= Remainder.DB_MAX_OUTPUT_PORT_TYPE
+Error <= and_b_zero.DB_MAX_OUTPUT_PORT_TYPE
+Fractional <= Fractional.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_ll
+A[0] => q0_div1.IN2
+A[0] => r0_div2.IN2
+A[0] => r0_div4.IN2
+A[0] => r0_div8.IN2
+A[1] => q0_div2.IN2
+A[1] => q1_div1.IN2
+A[1] => r1_div4.IN2
+A[1] => r1_div8.IN2
+A[2] => q0_div4.IN2
+A[2] => q1_div2.IN2
+A[2] => q2_div1.IN2
+A[2] => r2_div8.IN2
+A[3] => q0_div8.IN2
+A[3] => q1_div4.IN2
+A[3] => q2_div2.IN2
+A[3] => q3_div1.IN2
+B[0] => and_b1.IN0
+B[0] => and_b3.IN0
+B[0] => and_b5.IN0
+B[0] => and_b7.IN0
+B[0] => and_b9.IN0
+B[0] => and_b15.IN0
+B[0] => and_bzero.IN0
+B[0] => and_b2.IN0
+B[0] => and_b4.IN0
+B[0] => and_b8.IN0
+B[0] => and_b6.IN0
+B[0] => and_b10.IN0
+B[0] => and_b12.IN0
+B[1] => and_b2.IN1
+B[1] => and_b3.IN1
+B[1] => and_b6.IN1
+B[1] => and_b7.IN1
+B[1] => and_b10.IN1
+B[1] => and_b15.IN1
+B[1] => and_bzero.IN1
+B[1] => and_b1.IN1
+B[1] => and_b4.IN1
+B[1] => and_b8.IN1
+B[1] => and_b5.IN1
+B[1] => and_b9.IN1
+B[1] => and_b12.IN1
+B[2] => and_b4.IN2
+B[2] => and_b5.IN2
+B[2] => and_b6.IN2
+B[2] => and_b7.IN2
+B[2] => and_b12.IN2
+B[2] => and_b15.IN2
+B[2] => and_bzero.IN2
+B[2] => and_b1.IN2
+B[2] => and_b2.IN2
+B[2] => and_b8.IN2
+B[2] => and_b3.IN2
+B[2] => and_b9.IN2
+B[2] => and_b10.IN2
+B[3] => and_b8.IN3
+B[3] => and_b9.IN3
+B[3] => and_b10.IN3
+B[3] => and_b12.IN3
+B[3] => and_b15.IN3
+B[3] => and_bzero.IN3
+B[3] => and_b1.IN3
+B[3] => and_b2.IN3
+B[3] => and_b4.IN3
+B[3] => and_b3.IN3
+B[3] => and_b5.IN3
+B[3] => and_b6.IN3
+B[3] => and_b7.IN3
+Quotient[0] <= or_q0_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[1] <= or_q1_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[2] <= or_q2_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[3] <= q3_div1.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[0] <= or_r0_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[1] <= or_r1_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[2] <= r2_div8.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[3] <= <GND>
+Error <= buf_err.DB_MAX_OUTPUT_PORT_TYPE
+Fractional <= fractional_cond.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_lh
+A[0] => q0_div1.IN2
+A[0] => r0_div2.IN2
+A[0] => r0_div4.IN2
+A[0] => r0_div8.IN2
+A[1] => q0_div2.IN2
+A[1] => q1_div1.IN2
+A[1] => r1_div4.IN2
+A[1] => r1_div8.IN2
+A[2] => q0_div4.IN2
+A[2] => q1_div2.IN2
+A[2] => q2_div1.IN2
+A[2] => r2_div8.IN2
+A[3] => q0_div8.IN2
+A[3] => q1_div4.IN2
+A[3] => q2_div2.IN2
+A[3] => q3_div1.IN2
+B[0] => and_b1.IN0
+B[0] => and_b3.IN0
+B[0] => and_b5.IN0
+B[0] => and_b7.IN0
+B[0] => and_b9.IN0
+B[0] => and_b15.IN0
+B[0] => and_bzero.IN0
+B[0] => and_b2.IN0
+B[0] => and_b4.IN0
+B[0] => and_b8.IN0
+B[0] => and_b6.IN0
+B[0] => and_b10.IN0
+B[0] => and_b12.IN0
+B[1] => and_b2.IN1
+B[1] => and_b3.IN1
+B[1] => and_b6.IN1
+B[1] => and_b7.IN1
+B[1] => and_b10.IN1
+B[1] => and_b15.IN1
+B[1] => and_bzero.IN1
+B[1] => and_b1.IN1
+B[1] => and_b4.IN1
+B[1] => and_b8.IN1
+B[1] => and_b5.IN1
+B[1] => and_b9.IN1
+B[1] => and_b12.IN1
+B[2] => and_b4.IN2
+B[2] => and_b5.IN2
+B[2] => and_b6.IN2
+B[2] => and_b7.IN2
+B[2] => and_b12.IN2
+B[2] => and_b15.IN2
+B[2] => and_bzero.IN2
+B[2] => and_b1.IN2
+B[2] => and_b2.IN2
+B[2] => and_b8.IN2
+B[2] => and_b3.IN2
+B[2] => and_b9.IN2
+B[2] => and_b10.IN2
+B[3] => and_b8.IN3
+B[3] => and_b9.IN3
+B[3] => and_b10.IN3
+B[3] => and_b12.IN3
+B[3] => and_b15.IN3
+B[3] => and_bzero.IN3
+B[3] => and_b1.IN3
+B[3] => and_b2.IN3
+B[3] => and_b4.IN3
+B[3] => and_b3.IN3
+B[3] => and_b5.IN3
+B[3] => and_b6.IN3
+B[3] => and_b7.IN3
+Quotient[0] <= or_q0_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[1] <= or_q1_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[2] <= or_q2_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[3] <= q3_div1.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[0] <= or_r0_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[1] <= or_r1_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[2] <= r2_div8.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[3] <= <GND>
+Error <= buf_err.DB_MAX_OUTPUT_PORT_TYPE
+Fractional <= fractional_cond.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_hl
+A[0] => q0_div1.IN2
+A[0] => r0_div2.IN2
+A[0] => r0_div4.IN2
+A[0] => r0_div8.IN2
+A[1] => q0_div2.IN2
+A[1] => q1_div1.IN2
+A[1] => r1_div4.IN2
+A[1] => r1_div8.IN2
+A[2] => q0_div4.IN2
+A[2] => q1_div2.IN2
+A[2] => q2_div1.IN2
+A[2] => r2_div8.IN2
+A[3] => q0_div8.IN2
+A[3] => q1_div4.IN2
+A[3] => q2_div2.IN2
+A[3] => q3_div1.IN2
+B[0] => and_b1.IN0
+B[0] => and_b3.IN0
+B[0] => and_b5.IN0
+B[0] => and_b7.IN0
+B[0] => and_b9.IN0
+B[0] => and_b15.IN0
+B[0] => and_bzero.IN0
+B[0] => and_b2.IN0
+B[0] => and_b4.IN0
+B[0] => and_b8.IN0
+B[0] => and_b6.IN0
+B[0] => and_b10.IN0
+B[0] => and_b12.IN0
+B[1] => and_b2.IN1
+B[1] => and_b3.IN1
+B[1] => and_b6.IN1
+B[1] => and_b7.IN1
+B[1] => and_b10.IN1
+B[1] => and_b15.IN1
+B[1] => and_bzero.IN1
+B[1] => and_b1.IN1
+B[1] => and_b4.IN1
+B[1] => and_b8.IN1
+B[1] => and_b5.IN1
+B[1] => and_b9.IN1
+B[1] => and_b12.IN1
+B[2] => and_b4.IN2
+B[2] => and_b5.IN2
+B[2] => and_b6.IN2
+B[2] => and_b7.IN2
+B[2] => and_b12.IN2
+B[2] => and_b15.IN2
+B[2] => and_bzero.IN2
+B[2] => and_b1.IN2
+B[2] => and_b2.IN2
+B[2] => and_b8.IN2
+B[2] => and_b3.IN2
+B[2] => and_b9.IN2
+B[2] => and_b10.IN2
+B[3] => and_b8.IN3
+B[3] => and_b9.IN3
+B[3] => and_b10.IN3
+B[3] => and_b12.IN3
+B[3] => and_b15.IN3
+B[3] => and_bzero.IN3
+B[3] => and_b1.IN3
+B[3] => and_b2.IN3
+B[3] => and_b4.IN3
+B[3] => and_b3.IN3
+B[3] => and_b5.IN3
+B[3] => and_b6.IN3
+B[3] => and_b7.IN3
+Quotient[0] <= or_q0_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[1] <= or_q1_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[2] <= or_q2_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[3] <= q3_div1.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[0] <= or_r0_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[1] <= or_r1_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[2] <= r2_div8.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[3] <= <GND>
+Error <= buf_err.DB_MAX_OUTPUT_PORT_TYPE
+Fractional <= fractional_cond.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DIV8bit:div_module|DIV4bit_practical:div_hh
+A[0] => q0_div1.IN2
+A[0] => r0_div2.IN2
+A[0] => r0_div4.IN2
+A[0] => r0_div8.IN2
+A[1] => q0_div2.IN2
+A[1] => q1_div1.IN2
+A[1] => r1_div4.IN2
+A[1] => r1_div8.IN2
+A[2] => q0_div4.IN2
+A[2] => q1_div2.IN2
+A[2] => q2_div1.IN2
+A[2] => r2_div8.IN2
+A[3] => q0_div8.IN2
+A[3] => q1_div4.IN2
+A[3] => q2_div2.IN2
+A[3] => q3_div1.IN2
+B[0] => and_b1.IN0
+B[0] => and_b3.IN0
+B[0] => and_b5.IN0
+B[0] => and_b7.IN0
+B[0] => and_b9.IN0
+B[0] => and_b15.IN0
+B[0] => and_bzero.IN0
+B[0] => and_b2.IN0
+B[0] => and_b4.IN0
+B[0] => and_b8.IN0
+B[0] => and_b6.IN0
+B[0] => and_b10.IN0
+B[0] => and_b12.IN0
+B[1] => and_b2.IN1
+B[1] => and_b3.IN1
+B[1] => and_b6.IN1
+B[1] => and_b7.IN1
+B[1] => and_b10.IN1
+B[1] => and_b15.IN1
+B[1] => and_bzero.IN1
+B[1] => and_b1.IN1
+B[1] => and_b4.IN1
+B[1] => and_b8.IN1
+B[1] => and_b5.IN1
+B[1] => and_b9.IN1
+B[1] => and_b12.IN1
+B[2] => and_b4.IN2
+B[2] => and_b5.IN2
+B[2] => and_b6.IN2
+B[2] => and_b7.IN2
+B[2] => and_b12.IN2
+B[2] => and_b15.IN2
+B[2] => and_bzero.IN2
+B[2] => and_b1.IN2
+B[2] => and_b2.IN2
+B[2] => and_b8.IN2
+B[2] => and_b3.IN2
+B[2] => and_b9.IN2
+B[2] => and_b10.IN2
+B[3] => and_b8.IN3
+B[3] => and_b9.IN3
+B[3] => and_b10.IN3
+B[3] => and_b12.IN3
+B[3] => and_b15.IN3
+B[3] => and_bzero.IN3
+B[3] => and_b1.IN3
+B[3] => and_b2.IN3
+B[3] => and_b4.IN3
+B[3] => and_b3.IN3
+B[3] => and_b5.IN3
+B[3] => and_b6.IN3
+B[3] => and_b7.IN3
+Quotient[0] <= or_q0_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[1] <= or_q1_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[2] <= or_q2_special.DB_MAX_OUTPUT_PORT_TYPE
+Quotient[3] <= q3_div1.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[0] <= or_r0_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[1] <= or_r1_special.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[2] <= r2_div8.DB_MAX_OUTPUT_PORT_TYPE
+Remainder[3] <= <GND>
+Error <= buf_err.DB_MAX_OUTPUT_PORT_TYPE
+Fractional <= fractional_cond.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|NOT8bit:not_module
+A[0] => Result[0].DATAIN
+A[1] => Result[1].DATAIN
+A[2] => Result[2].DATAIN
+A[3] => Result[3].DATAIN
+A[4] => Result[4].DATAIN
+A[5] => Result[5].DATAIN
+A[6] => Result[6].DATAIN
+A[7] => Result[7].DATAIN
+Result[0] <= A[0].DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= A[1].DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= A[2].DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= A[3].DB_MAX_OUTPUT_PORT_TYPE
+Result[4] <= A[4].DB_MAX_OUTPUT_PORT_TYPE
+Result[5] <= A[5].DB_MAX_OUTPUT_PORT_TYPE
+Result[6] <= A[6].DB_MAX_OUTPUT_PORT_TYPE
+Result[7] <= A[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MUX8x8:result_mux
+in0[0] => in0[0].IN1
+in0[1] => in0[1].IN1
+in0[2] => in0[2].IN1
+in0[3] => in0[3].IN1
+in0[4] => in0[4].IN1
+in0[5] => in0[5].IN1
+in0[6] => in0[6].IN1
+in0[7] => in0[7].IN1
+in1[0] => in1[0].IN1
+in1[1] => in1[1].IN1
+in1[2] => in1[2].IN1
+in1[3] => in1[3].IN1
+in1[4] => in1[4].IN1
+in1[5] => in1[5].IN1
+in1[6] => in1[6].IN1
+in1[7] => in1[7].IN1
+in2[0] => in2[0].IN1
+in2[1] => in2[1].IN1
+in2[2] => in2[2].IN1
+in2[3] => in2[3].IN1
+in2[4] => in2[4].IN1
+in2[5] => in2[5].IN1
+in2[6] => in2[6].IN1
+in2[7] => in2[7].IN1
+in3[0] => in3[0].IN1
+in3[1] => in3[1].IN1
+in3[2] => in3[2].IN1
+in3[3] => in3[3].IN1
+in3[4] => in3[4].IN1
+in3[5] => in3[5].IN1
+in3[6] => in3[6].IN1
+in3[7] => in3[7].IN1
+in4[0] => in4[0].IN1
+in4[1] => in4[1].IN1
+in4[2] => in4[2].IN1
+in4[3] => in4[3].IN1
+in4[4] => in4[4].IN1
+in4[5] => in4[5].IN1
+in4[6] => in4[6].IN1
+in4[7] => in4[7].IN1
+in5[0] => in5[0].IN1
+in5[1] => in5[1].IN1
+in5[2] => in5[2].IN1
+in5[3] => in5[3].IN1
+in5[4] => in5[4].IN1
+in5[5] => in5[5].IN1
+in5[6] => in5[6].IN1
+in5[7] => in5[7].IN1
+in6[0] => in6[0].IN1
+in6[1] => in6[1].IN1
+in6[2] => in6[2].IN1
+in6[3] => in6[3].IN1
+in6[4] => in6[4].IN1
+in6[5] => in6[5].IN1
+in6[6] => in6[6].IN1
+in6[7] => in6[7].IN1
+in7[0] => in7[0].IN1
+in7[1] => in7[1].IN1
+in7[2] => in7[2].IN1
+in7[3] => in7[3].IN1
+in7[4] => in7[4].IN1
+in7[5] => in7[5].IN1
+in7[6] => in7[6].IN1
+in7[7] => in7[7].IN1
+sel[0] => sel[0].IN2
+sel[1] => sel[1].IN2
+sel[2] => sel[2].IN2
+out[0] <= MUX8x4:mux_low.out
+out[1] <= MUX8x4:mux_low.out
+out[2] <= MUX8x4:mux_low.out
+out[3] <= MUX8x4:mux_low.out
+out[4] <= MUX8x4:mux_high.out
+out[5] <= MUX8x4:mux_high.out
+out[6] <= MUX8x4:mux_high.out
+out[7] <= MUX8x4:mux_high.out
+
+
+|ULA8bit_PRINCIPAL|MUX8x8:result_mux|MUX8x4:mux_low
+in0[0] => a0_0.IN1
+in0[1] => a1_0.IN1
+in0[2] => a2_0.IN1
+in0[3] => a3_0.IN1
+in1[0] => a0_1.IN1
+in1[1] => a1_1.IN1
+in1[2] => a2_1.IN1
+in1[3] => a3_1.IN1
+in2[0] => a0_2.IN1
+in2[1] => a1_2.IN1
+in2[2] => a2_2.IN1
+in2[3] => a3_2.IN1
+in3[0] => a0_3.IN1
+in3[1] => a1_3.IN1
+in3[2] => a2_3.IN1
+in3[3] => a3_3.IN1
+in4[0] => a0_4.IN1
+in4[1] => a1_4.IN1
+in4[2] => a2_4.IN1
+in4[3] => a3_4.IN1
+in5[0] => a0_5.IN1
+in5[1] => a1_5.IN1
+in5[2] => a2_5.IN1
+in5[3] => a3_5.IN1
+in6[0] => a0_6.IN1
+in6[1] => a1_6.IN1
+in6[2] => a2_6.IN1
+in6[3] => a3_6.IN1
+in7[0] => a0_7.IN1
+in7[1] => a1_7.IN1
+in7[2] => a2_7.IN1
+in7[3] => a3_7.IN1
+sel[0] => dec1.IN0
+sel[0] => dec3.IN0
+sel[0] => dec5.IN0
+sel[0] => dec7.IN0
+sel[0] => dec0.IN0
+sel[0] => dec2.IN0
+sel[0] => dec4.IN0
+sel[0] => dec6.IN0
+sel[1] => dec2.IN1
+sel[1] => dec3.IN1
+sel[1] => dec6.IN1
+sel[1] => dec7.IN1
+sel[1] => dec0.IN1
+sel[1] => dec1.IN1
+sel[1] => dec4.IN1
+sel[1] => dec5.IN1
+sel[2] => dec4.IN2
+sel[2] => dec5.IN2
+sel[2] => dec6.IN2
+sel[2] => dec7.IN2
+sel[2] => dec0.IN2
+sel[2] => dec1.IN2
+sel[2] => dec2.IN2
+sel[2] => dec3.IN2
+out[0] <= o0_final.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= o1_final.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= o2_final.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= o3_final.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|MUX8x8:result_mux|MUX8x4:mux_high
+in0[0] => a0_0.IN1
+in0[1] => a1_0.IN1
+in0[2] => a2_0.IN1
+in0[3] => a3_0.IN1
+in1[0] => a0_1.IN1
+in1[1] => a1_1.IN1
+in1[2] => a2_1.IN1
+in1[3] => a3_1.IN1
+in2[0] => a0_2.IN1
+in2[1] => a1_2.IN1
+in2[2] => a2_2.IN1
+in2[3] => a3_2.IN1
+in3[0] => a0_3.IN1
+in3[1] => a1_3.IN1
+in3[2] => a2_3.IN1
+in3[3] => a3_3.IN1
+in4[0] => a0_4.IN1
+in4[1] => a1_4.IN1
+in4[2] => a2_4.IN1
+in4[3] => a3_4.IN1
+in5[0] => a0_5.IN1
+in5[1] => a1_5.IN1
+in5[2] => a2_5.IN1
+in5[3] => a3_5.IN1
+in6[0] => a0_6.IN1
+in6[1] => a1_6.IN1
+in6[2] => a2_6.IN1
+in6[3] => a3_6.IN1
+in7[0] => a0_7.IN1
+in7[1] => a1_7.IN1
+in7[2] => a2_7.IN1
+in7[3] => a3_7.IN1
+sel[0] => dec1.IN0
+sel[0] => dec3.IN0
+sel[0] => dec5.IN0
+sel[0] => dec7.IN0
+sel[0] => dec0.IN0
+sel[0] => dec2.IN0
+sel[0] => dec4.IN0
+sel[0] => dec6.IN0
+sel[1] => dec2.IN1
+sel[1] => dec3.IN1
+sel[1] => dec6.IN1
+sel[1] => dec7.IN1
+sel[1] => dec0.IN1
+sel[1] => dec1.IN1
+sel[1] => dec4.IN1
+sel[1] => dec5.IN1
+sel[2] => dec4.IN2
+sel[2] => dec5.IN2
+sel[2] => dec6.IN2
+sel[2] => dec7.IN2
+sel[2] => dec0.IN2
+sel[2] => dec1.IN2
+sel[2] => dec2.IN2
+sel[2] => dec3.IN2
+out[0] <= o0_final.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= o1_final.DB_MAX_OUTPUT_PORT_TYPE
+out[2] <= o2_final.DB_MAX_OUTPUT_PORT_TYPE
+out[3] <= o3_final.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|FLAGS8bit:flags_detector
+Result[0] => and_low_4.IN0
+Result[1] => and_low_4.IN1
+Result[2] => and_low_4.IN2
+Result[3] => and_low_4.IN3
+Result[4] => and_high_4.IN0
+Result[5] => and_high_4.IN1
+Result[6] => and_high_4.IN2
+Result[7] => negative_buf.DATAIN
+Result[7] => and_high_4.IN3
+Cout => ovf_soma_and.IN1
+Borrow => ovf_sub_and.IN1
+MultOvf => ovf_mult_and.IN1
+DivError => error_buf.DATAIN
+Op[0] => is_sub_and.IN0
+Op[0] => is_mult_and.IN0
+Op[0] => is_soma_and.IN0
+Op[1] => is_soma_and.IN1
+Op[1] => is_sub_and.IN1
+Op[1] => is_mult_and.IN1
+Op[2] => is_mult_and.IN2
+Op[2] => is_soma_and.IN2
+Op[2] => is_sub_and.IN2
+Overflow <= ovf_or2.DB_MAX_OUTPUT_PORT_TYPE
+Zero <= zero_flag.DB_MAX_OUTPUT_PORT_TYPE
+Negative <= negative_buf.DB_MAX_OUTPUT_PORT_TYPE
+Error <= error_buf.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF_simples:reg_overflow
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF_simples:reg_zero
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF_simples:reg_negative
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|DFF_simples:reg_error
+d => q_reg.DATAIN
+clk => q_reg.CLK
+rst => q_reg.ACLR
+en => q_reg.ENA
+q <= q_reg.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display
+bin[0] => bin[0].IN3
+bin[1] => bin[1].IN3
+bin[2] => bin[2].IN3
+bin[3] => bin[3].IN3
+bin[4] => bin[4].IN3
+bin[5] => bin[5].IN3
+bin[6] => bin[6].IN3
+bin[7] => bin[7].IN3
+sel[0] => sel[0].IN21
+sel[1] => sel[1].IN21
+segmentsUn[0] <= mux4to1:muxU0.port5
+segmentsUn[1] <= mux4to1:muxU1.port5
+segmentsUn[2] <= mux4to1:muxU2.port5
+segmentsUn[3] <= mux4to1:muxU3.port5
+segmentsUn[4] <= mux4to1:muxU4.port5
+segmentsUn[5] <= mux4to1:muxU5.port5
+segmentsUn[6] <= mux4to1:muxU6.port5
+segmentsDez[0] <= mux4to1:muxD0.port5
+segmentsDez[1] <= mux4to1:muxD1.port5
+segmentsDez[2] <= mux4to1:muxD2.port5
+segmentsDez[3] <= mux4to1:muxD3.port5
+segmentsDez[4] <= mux4to1:muxD4.port5
+segmentsDez[5] <= mux4to1:muxD5.port5
+segmentsDez[6] <= mux4to1:muxD6.port5
+segmentsCen[0] <= mux4to1:muxC0.port5
+segmentsCen[1] <= mux4to1:muxC1.port5
+segmentsCen[2] <= mux4to1:muxC2.port5
+segmentsCen[3] <= mux4to1:muxC3.port5
+segmentsCen[4] <= mux4to1:muxC4.port5
+segmentsCen[5] <= mux4to1:muxC5.port5
+segmentsCen[6] <= mux4to1:muxC6.port5
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToOct:convOct
+result[0] => u0.DATAIN
+result[1] => u1.DATAIN
+result[2] => u2.DATAIN
+result[3] => d0.DATAIN
+result[4] => d1.DATAIN
+result[5] => d2.DATAIN
+result[6] => c0.DATAIN
+result[7] => c1.DATAIN
+segmentsUn[0] <= decoderSaida:dec0.segments
+segmentsUn[1] <= decoderSaida:dec0.segments
+segmentsUn[2] <= decoderSaida:dec0.segments
+segmentsUn[3] <= decoderSaida:dec0.segments
+segmentsUn[4] <= decoderSaida:dec0.segments
+segmentsUn[5] <= decoderSaida:dec0.segments
+segmentsUn[6] <= decoderSaida:dec0.segments
+segmentsDez[0] <= decoderSaida:dec1.segments
+segmentsDez[1] <= decoderSaida:dec1.segments
+segmentsDez[2] <= decoderSaida:dec1.segments
+segmentsDez[3] <= decoderSaida:dec1.segments
+segmentsDez[4] <= decoderSaida:dec1.segments
+segmentsDez[5] <= decoderSaida:dec1.segments
+segmentsDez[6] <= decoderSaida:dec1.segments
+segmentsCen[0] <= decoderSaida:dec2.segments
+segmentsCen[1] <= decoderSaida:dec2.segments
+segmentsCen[2] <= decoderSaida:dec2.segments
+segmentsCen[3] <= decoderSaida:dec2.segments
+segmentsCen[4] <= decoderSaida:dec2.segments
+segmentsCen[5] <= decoderSaida:dec2.segments
+segmentsCen[6] <= decoderSaida:dec2.segments
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToOct:convOct|decoderSaida:dec0
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToOct:convOct|decoderSaida:dec1
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToOct:convOct|decoderSaida:dec2
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToHex:convHex
+result[0] => u0.DATAIN
+result[1] => u1.DATAIN
+result[2] => u2.DATAIN
+result[3] => u3.DATAIN
+result[4] => d0.DATAIN
+result[5] => d1.DATAIN
+result[6] => d2.DATAIN
+result[7] => d3.DATAIN
+segmentsUn[0] <= decoderSaida:dec0.segments
+segmentsUn[1] <= decoderSaida:dec0.segments
+segmentsUn[2] <= decoderSaida:dec0.segments
+segmentsUn[3] <= decoderSaida:dec0.segments
+segmentsUn[4] <= decoderSaida:dec0.segments
+segmentsUn[5] <= decoderSaida:dec0.segments
+segmentsUn[6] <= decoderSaida:dec0.segments
+segmentsDez[0] <= decoderSaida:dec1.segments
+segmentsDez[1] <= decoderSaida:dec1.segments
+segmentsDez[2] <= decoderSaida:dec1.segments
+segmentsDez[3] <= decoderSaida:dec1.segments
+segmentsDez[4] <= decoderSaida:dec1.segments
+segmentsDez[5] <= decoderSaida:dec1.segments
+segmentsDez[6] <= decoderSaida:dec1.segments
+segmentsCen[0] <= decoderSaida:dec2.segments
+segmentsCen[1] <= decoderSaida:dec2.segments
+segmentsCen[2] <= decoderSaida:dec2.segments
+segmentsCen[3] <= decoderSaida:dec2.segments
+segmentsCen[4] <= decoderSaida:dec2.segments
+segmentsCen[5] <= decoderSaida:dec2.segments
+segmentsCen[6] <= decoderSaida:dec2.segments
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToHex:convHex|decoderSaida:dec0
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToHex:convHex|decoderSaida:dec1
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToHex:convHex|decoderSaida:dec2
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToBcd:convBcd
+S[0] => buf_U0.DATAIN
+S[1] => and_U1_2.IN0
+S[1] => and_U1_3.IN0
+S[1] => and_U1_4.IN0
+S[1] => and_U1_6.IN0
+S[1] => and_U1_7.IN0
+S[1] => and_U1_9.IN0
+S[1] => and_U1_10.IN0
+S[1] => and_U1_12.IN0
+S[1] => and_U1_17.IN0
+S[1] => and_U1_18.IN0
+S[1] => and_U1_19.IN0
+S[1] => and_U1_25.IN0
+S[1] => and_U1_27.IN0
+S[1] => and_U1_29.IN0
+S[1] => and_U1_31.IN0
+S[1] => and_U1_33.IN0
+S[1] => and_U2_1.IN0
+S[1] => and_U2_2.IN0
+S[1] => and_U2_3.IN0
+S[1] => and_U2_6.IN0
+S[1] => and_U2_9.IN0
+S[1] => and_U2_10.IN0
+S[1] => and_U2_12.IN0
+S[1] => and_U2_13.IN0
+S[1] => and_U2_16.IN0
+S[1] => and_U2_18.IN0
+S[1] => and_U2_19.IN0
+S[1] => and_U2_28.IN0
+S[1] => and_U2_29.IN0
+S[1] => and_U2_34.IN0
+S[1] => and_U2_35.IN0
+S[1] => and_U3_1.IN0
+S[1] => and_U3_3.IN0
+S[1] => and_U3_5.IN0
+S[1] => and_U3_6.IN0
+S[1] => and_U3_8.IN0
+S[1] => and_U3_9.IN0
+S[1] => and_U3_11.IN0
+S[1] => and_U3_12.IN0
+S[1] => and_U3_16.IN0
+S[1] => and_U3_17.IN0
+S[1] => and_U3_19.IN0
+S[1] => and_U3_23.IN0
+S[1] => and_D0_2.IN0
+S[1] => and_D0_3.IN0
+S[1] => and_D0_6.IN0
+S[1] => and_D0_8.IN0
+S[1] => and_D0_11.IN0
+S[1] => and_D0_13.IN0
+S[1] => and_D0_15.IN0
+S[1] => and_D0_19.IN0
+S[1] => and_D0_22.IN0
+S[1] => and_D0_24.IN0
+S[1] => and_D0_25.IN0
+S[1] => and_D0_26.IN0
+S[1] => and_D0_29.IN0
+S[1] => and_U1_1.IN0
+S[1] => and_U1_5.IN0
+S[1] => and_U1_8.IN0
+S[1] => and_U1_11.IN0
+S[1] => and_U1_13.IN0
+S[1] => and_U1_14.IN0
+S[1] => and_U1_15.IN0
+S[1] => and_U1_16.IN0
+S[1] => and_U1_20.IN0
+S[1] => and_U1_21.IN0
+S[1] => and_U1_22.IN0
+S[1] => and_U1_23.IN0
+S[1] => and_U1_24.IN0
+S[1] => and_U1_26.IN0
+S[1] => and_U1_28.IN0
+S[1] => and_U1_30.IN0
+S[1] => and_U1_32.IN0
+S[1] => and_U1_34.IN0
+S[1] => and_U1_35.IN0
+S[1] => and_U2_5.IN0
+S[1] => and_U2_7.IN0
+S[1] => and_U2_8.IN0
+S[1] => and_U2_11.IN0
+S[1] => and_U2_15.IN0
+S[1] => and_U2_17.IN0
+S[1] => and_U2_21.IN0
+S[1] => and_U2_22.IN0
+S[1] => and_U2_23.IN0
+S[1] => and_U2_24.IN0
+S[1] => and_U2_25.IN0
+S[1] => and_U2_26.IN0
+S[1] => and_U2_27.IN0
+S[1] => and_U2_31.IN0
+S[1] => and_U2_33.IN0
+S[1] => and_U3_2.IN0
+S[1] => and_U3_4.IN0
+S[1] => and_U3_7.IN0
+S[1] => and_U3_10.IN0
+S[1] => and_U3_13.IN0
+S[1] => and_U3_14.IN0
+S[1] => and_U3_15.IN0
+S[1] => and_U3_18.IN0
+S[1] => and_U3_20.IN0
+S[1] => and_U3_21.IN0
+S[1] => and_U3_22.IN0
+S[1] => and_U3_24.IN0
+S[1] => and_U3_25.IN0
+S[2] => and_U1_1.IN1
+S[2] => and_U1_2.IN1
+S[2] => and_U1_3.IN1
+S[2] => and_U1_4.IN1
+S[2] => and_U1_8.IN1
+S[2] => and_U1_9.IN1
+S[2] => and_U1_11.IN1
+S[2] => and_U1_15.IN1
+S[2] => and_U1_16.IN1
+S[2] => and_U1_18.IN1
+S[2] => and_U1_22.IN1
+S[2] => and_U1_26.IN1
+S[2] => and_U1_27.IN1
+S[2] => and_U2_1.IN1
+S[2] => and_U2_2.IN1
+S[2] => and_U2_3.IN1
+S[2] => and_U2_4.IN0
+S[2] => and_U2_5.IN1
+S[2] => and_U2_7.IN1
+S[2] => and_U2_8.IN1
+S[2] => and_U2_10.IN1
+S[2] => and_U2_11.IN1
+S[2] => and_U2_13.IN1
+S[2] => and_U2_14.IN0
+S[2] => and_U2_15.IN1
+S[2] => and_U2_19.IN1
+S[2] => and_U2_24.IN1
+S[2] => and_U2_25.IN1
+S[2] => and_U2_27.IN1
+S[2] => and_U2_29.IN1
+S[2] => and_U2_32.IN0
+S[2] => and_U3_1.IN1
+S[2] => and_U3_4.IN1
+S[2] => and_U3_5.IN1
+S[2] => and_U3_6.IN1
+S[2] => and_U3_7.IN1
+S[2] => and_U3_8.IN1
+S[2] => and_U3_10.IN1
+S[2] => and_U3_11.IN1
+S[2] => and_U3_15.IN1
+S[2] => and_U3_19.IN1
+S[2] => and_U3_20.IN1
+S[2] => and_U3_21.IN1
+S[2] => and_D0_1.IN0
+S[2] => and_D0_3.IN1
+S[2] => and_D0_5.IN0
+S[2] => and_D0_7.IN0
+S[2] => and_D0_11.IN1
+S[2] => and_D0_12.IN0
+S[2] => and_D0_14.IN0
+S[2] => and_D0_15.IN1
+S[2] => and_D0_18.IN0
+S[2] => and_D0_23.IN0
+S[2] => and_D0_25.IN1
+S[2] => and_D0_26.IN1
+S[2] => and_D0_29.IN1
+S[2] => and_D1_7.IN0
+S[2] => and_D1_8.IN0
+S[2] => and_D1_11.IN0
+S[2] => and_D2_7.IN0
+S[2] => and_D3_3.IN0
+S[2] => and_C0_4.IN0
+S[2] => and_U1_6.IN1
+S[2] => and_U1_10.IN1
+S[2] => and_U1_14.IN1
+S[2] => and_U1_19.IN1
+S[2] => and_U1_21.IN1
+S[2] => and_U1_23.IN1
+S[2] => and_U1_25.IN1
+S[2] => and_U1_30.IN1
+S[2] => and_U1_31.IN1
+S[2] => and_U1_32.IN1
+S[2] => and_U1_33.IN1
+S[2] => and_U1_34.IN1
+S[2] => and_U1_35.IN1
+S[2] => and_U2_6.IN1
+S[2] => and_U2_9.IN1
+S[2] => and_U2_12.IN1
+S[2] => and_U2_16.IN1
+S[2] => and_U2_17.IN1
+S[2] => and_U2_18.IN1
+S[2] => and_U2_20.IN0
+S[2] => and_U2_21.IN1
+S[2] => and_U2_22.IN1
+S[2] => and_U2_23.IN1
+S[2] => and_U2_26.IN1
+S[2] => and_U2_28.IN1
+S[2] => and_U2_30.IN0
+S[2] => and_U2_31.IN1
+S[2] => and_U2_33.IN1
+S[2] => and_U2_34.IN1
+S[2] => and_U2_35.IN1
+S[2] => and_U3_2.IN1
+S[2] => and_U3_3.IN1
+S[2] => and_U3_9.IN1
+S[2] => and_U3_12.IN1
+S[2] => and_U3_13.IN1
+S[2] => and_U3_14.IN1
+S[2] => and_U3_16.IN1
+S[2] => and_U3_17.IN1
+S[2] => and_U3_18.IN1
+S[2] => and_U3_22.IN1
+S[2] => and_U3_23.IN1
+S[2] => and_U3_24.IN1
+S[2] => and_U3_25.IN1
+S[2] => and_D0_10.IN0
+S[2] => and_D0_17.IN0
+S[2] => and_D0_20.IN0
+S[2] => and_D0_28.IN0
+S[2] => and_D0_30.IN0
+S[2] => and_D0_31.IN0
+S[2] => and_D1_4.IN0
+S[2] => and_D1_9.IN0
+S[2] => and_D2_8.IN0
+S[2] => and_D3_5.IN0
+S[3] => and_U1_1.IN2
+S[3] => and_U1_2.IN2
+S[3] => and_U1_4.IN2
+S[3] => and_U1_5.IN1
+S[3] => and_U1_7.IN1
+S[3] => and_U1_8.IN2
+S[3] => and_U1_9.IN2
+S[3] => and_U1_10.IN2
+S[3] => and_U1_13.IN1
+S[3] => and_U1_14.IN2
+S[3] => and_U1_15.IN2
+S[3] => and_U1_17.IN1
+S[3] => and_U1_19.IN2
+S[3] => and_U1_21.IN2
+S[3] => and_U1_24.IN1
+S[3] => and_U1_26.IN2
+S[3] => and_U1_32.IN2
+S[3] => and_U1_33.IN2
+S[3] => and_U2_1.IN2
+S[3] => and_U2_3.IN2
+S[3] => and_U2_4.IN1
+S[3] => and_U2_5.IN2
+S[3] => and_U2_6.IN2
+S[3] => and_U2_9.IN2
+S[3] => and_U2_10.IN2
+S[3] => and_U2_15.IN2
+S[3] => and_U2_16.IN2
+S[3] => and_U2_17.IN2
+S[3] => and_U2_18.IN2
+S[3] => and_U2_19.IN2
+S[3] => and_U2_26.IN2
+S[3] => and_U2_27.IN2
+S[3] => and_U2_33.IN2
+S[3] => and_U3_1.IN2
+S[3] => and_U3_2.IN2
+S[3] => and_U3_3.IN2
+S[3] => and_U3_4.IN2
+S[3] => and_U3_5.IN2
+S[3] => and_U3_10.IN2
+S[3] => and_U3_11.IN2
+S[3] => and_U3_12.IN2
+S[3] => and_U3_14.IN2
+S[3] => and_U3_16.IN2
+S[3] => and_U3_18.IN2
+S[3] => and_U3_20.IN2
+S[3] => and_U3_25.IN2
+S[3] => and_D0_1.IN1
+S[3] => and_D0_2.IN1
+S[3] => and_D0_3.IN2
+S[3] => and_D0_4.IN0
+S[3] => and_D0_5.IN1
+S[3] => and_D0_6.IN1
+S[3] => and_D0_9.IN0
+S[3] => and_D0_10.IN1
+S[3] => and_D0_12.IN1
+S[3] => and_D0_13.IN1
+S[3] => and_D0_15.IN2
+S[3] => and_D0_17.IN1
+S[3] => and_D0_21.IN0
+S[3] => and_D0_23.IN1
+S[3] => and_D0_24.IN1
+S[3] => and_D0_26.IN2
+S[3] => and_D0_30.IN1
+S[3] => and_D1_2.IN0
+S[3] => and_D1_7.IN1
+S[3] => and_D1_8.IN1
+S[3] => and_D1_10.IN0
+S[3] => and_D2_5.IN0
+S[3] => and_D2_7.IN1
+S[3] => and_D3_2.IN0
+S[3] => and_C0_3.IN0
+S[3] => and_C1_3.IN0
+S[3] => and_U1_3.IN2
+S[3] => and_U1_6.IN2
+S[3] => and_U1_11.IN2
+S[3] => and_U1_12.IN1
+S[3] => and_U1_16.IN2
+S[3] => and_U1_18.IN2
+S[3] => and_U1_20.IN1
+S[3] => and_U1_22.IN2
+S[3] => and_U1_23.IN2
+S[3] => and_U1_25.IN2
+S[3] => and_U1_27.IN2
+S[3] => and_U1_28.IN1
+S[3] => and_U1_29.IN1
+S[3] => and_U1_30.IN2
+S[3] => and_U1_31.IN2
+S[3] => and_U1_34.IN2
+S[3] => and_U1_35.IN2
+S[3] => and_U2_2.IN2
+S[3] => and_U2_8.IN2
+S[3] => and_U2_12.IN2
+S[3] => and_U2_13.IN2
+S[3] => and_U2_14.IN1
+S[3] => and_U2_20.IN1
+S[3] => and_U2_21.IN2
+S[3] => and_U2_23.IN2
+S[3] => and_U2_25.IN2
+S[3] => and_U2_28.IN2
+S[3] => and_U2_29.IN2
+S[3] => and_U2_30.IN1
+S[3] => and_U2_32.IN1
+S[3] => and_U2_34.IN2
+S[3] => and_U2_35.IN2
+S[3] => and_U3_6.IN2
+S[3] => and_U3_7.IN2
+S[3] => and_U3_8.IN2
+S[3] => and_U3_9.IN2
+S[3] => and_U3_13.IN2
+S[3] => and_U3_15.IN2
+S[3] => and_U3_17.IN2
+S[3] => and_U3_19.IN2
+S[3] => and_U3_21.IN2
+S[3] => and_U3_22.IN2
+S[3] => and_U3_23.IN2
+S[3] => and_U3_24.IN2
+S[3] => and_D0_7.IN1
+S[3] => and_D0_8.IN1
+S[3] => and_D0_11.IN2
+S[3] => and_D0_14.IN1
+S[3] => and_D0_16.IN0
+S[3] => and_D0_18.IN1
+S[3] => and_D0_19.IN1
+S[3] => and_D0_20.IN1
+S[3] => and_D0_22.IN1
+S[3] => and_D0_25.IN2
+S[3] => and_D0_27.IN0
+S[3] => and_D0_28.IN1
+S[3] => and_D0_31.IN1
+S[3] => and_D1_3.IN0
+S[3] => and_D1_6.IN0
+S[3] => and_D1_9.IN1
+S[3] => and_D2_8.IN1
+S[3] => and_D3_4.IN0
+S[3] => and_D3_5.IN1
+S[3] => and_C0_5.IN0
+S[4] => and_U1_3.IN3
+S[4] => and_U1_4.IN3
+S[4] => and_U1_13.IN2
+S[4] => and_U1_14.IN3
+S[4] => and_U1_16.IN3
+S[4] => and_U1_18.IN3
+S[4] => and_U1_19.IN3
+S[4] => and_U1_30.IN3
+S[4] => and_U1_31.IN3
+S[4] => and_U1_32.IN3
+S[4] => and_U1_33.IN3
+S[4] => and_U1_34.IN3
+S[4] => and_U1_35.IN3
+S[4] => and_U2_1.IN3
+S[4] => and_U2_2.IN3
+S[4] => and_U2_3.IN3
+S[4] => and_U2_6.IN3
+S[4] => and_U2_7.IN2
+S[4] => and_U2_8.IN3
+S[4] => and_U2_14.IN2
+S[4] => and_U2_17.IN3
+S[4] => and_U2_18.IN3
+S[4] => and_U2_20.IN2
+S[4] => and_U2_21.IN3
+S[4] => and_U2_26.IN3
+S[4] => and_U2_27.IN3
+S[4] => and_U2_28.IN3
+S[4] => and_U2_29.IN3
+S[4] => and_U2_31.IN2
+S[4] => and_U3_2.IN3
+S[4] => and_U3_3.IN3
+S[4] => and_U3_4.IN3
+S[4] => and_U3_5.IN3
+S[4] => and_U3_6.IN3
+S[4] => and_U3_9.IN3
+S[4] => and_U3_12.IN3
+S[4] => and_U3_13.IN3
+S[4] => and_U3_15.IN3
+S[4] => and_U3_18.IN3
+S[4] => and_U3_20.IN3
+S[4] => and_U3_22.IN3
+S[4] => and_U3_23.IN3
+S[4] => and_D0_9.IN1
+S[4] => and_D0_10.IN2
+S[4] => and_D0_14.IN2
+S[4] => and_D0_28.IN2
+S[4] => and_D0_30.IN2
+S[4] => and_D0_31.IN2
+S[4] => and_D1_2.IN1
+S[4] => and_D1_7.IN2
+S[4] => and_D1_8.IN2
+S[4] => and_D1_10.IN1
+S[4] => and_D1_11.IN1
+S[4] => and_D2_1.IN0
+S[4] => and_D2_3.IN0
+S[4] => and_D2_4.IN0
+S[4] => and_D2_8.IN2
+S[4] => and_D3_1.IN0
+S[4] => and_D3_2.IN1
+S[4] => and_D3_3.IN1
+S[4] => and_C0_2.IN0
+S[4] => and_C1_2.IN0
+S[4] => and_U1_5.IN2
+S[4] => and_U1_7.IN2
+S[4] => and_U1_8.IN3
+S[4] => and_U1_9.IN3
+S[4] => and_U1_12.IN2
+S[4] => and_U1_17.IN2
+S[4] => and_U1_20.IN2
+S[4] => and_U1_22.IN3
+S[4] => and_U1_24.IN2
+S[4] => and_U1_26.IN3
+S[4] => and_U1_27.IN3
+S[4] => and_U1_28.IN2
+S[4] => and_U1_29.IN2
+S[4] => and_U2_4.IN2
+S[4] => and_U2_5.IN3
+S[4] => and_U2_9.IN3
+S[4] => and_U2_10.IN3
+S[4] => and_U2_11.IN2
+S[4] => and_U2_12.IN3
+S[4] => and_U2_13.IN3
+S[4] => and_U2_15.IN3
+S[4] => and_U2_16.IN3
+S[4] => and_U2_19.IN3
+S[4] => and_U2_22.IN2
+S[4] => and_U2_23.IN3
+S[4] => and_U2_24.IN2
+S[4] => and_U2_25.IN3
+S[4] => and_U2_30.IN2
+S[4] => and_U2_32.IN2
+S[4] => and_U2_33.IN3
+S[4] => and_U2_34.IN3
+S[4] => and_U2_35.IN3
+S[4] => and_U3_1.IN3
+S[4] => and_U3_7.IN3
+S[4] => and_U3_8.IN3
+S[4] => and_U3_10.IN3
+S[4] => and_U3_11.IN3
+S[4] => and_U3_14.IN3
+S[4] => and_U3_16.IN3
+S[4] => and_U3_17.IN3
+S[4] => and_U3_19.IN3
+S[4] => and_U3_21.IN3
+S[4] => and_U3_24.IN3
+S[4] => and_U3_25.IN3
+S[4] => and_D0_4.IN1
+S[4] => and_D0_5.IN2
+S[4] => and_D0_6.IN2
+S[4] => and_D0_16.IN1
+S[4] => and_D0_18.IN2
+S[4] => and_D0_19.IN2
+S[4] => and_D0_21.IN1
+S[4] => and_D0_23.IN2
+S[4] => and_D0_24.IN2
+S[4] => and_D0_25.IN3
+S[4] => and_D0_26.IN3
+S[4] => and_D0_27.IN1
+S[4] => and_D0_29.IN2
+S[4] => and_D1_1.IN0
+S[4] => and_D1_3.IN1
+S[4] => and_D1_4.IN1
+S[4] => and_D1_5.IN0
+S[4] => and_D1_6.IN1
+S[4] => and_D2_2.IN0
+S[4] => and_D2_6.IN0
+S[4] => and_D3_4.IN1
+S[4] => and_D3_5.IN2
+S[4] => and_C0_5.IN1
+S[5] => and_U1_1.IN3
+S[5] => and_U1_3.IN4
+S[5] => and_U1_4.IN4
+S[5] => and_U1_5.IN3
+S[5] => and_U1_6.IN3
+S[5] => and_U1_8.IN4
+S[5] => and_U1_10.IN3
+S[5] => and_U1_12.IN3
+S[5] => and_U1_16.IN4
+S[5] => and_U1_17.IN3
+S[5] => and_U1_19.IN4
+S[5] => and_U1_23.IN3
+S[5] => and_U1_27.IN4
+S[5] => and_U1_28.IN3
+S[5] => and_U1_30.IN4
+S[5] => and_U1_32.IN4
+S[5] => and_U2_1.IN4
+S[5] => and_U2_7.IN3
+S[5] => and_U2_8.IN4
+S[5] => and_U2_9.IN4
+S[5] => and_U2_10.IN4
+S[5] => and_U2_17.IN4
+S[5] => and_U2_22.IN3
+S[5] => and_U2_23.IN4
+S[5] => and_U2_24.IN3
+S[5] => and_U2_25.IN4
+S[5] => and_U2_28.IN4
+S[5] => and_U2_29.IN4
+S[5] => and_U2_34.IN4
+S[5] => and_U2_35.IN4
+S[5] => and_U3_1.IN4
+S[5] => and_U3_2.IN4
+S[5] => and_U3_4.IN4
+S[5] => and_U3_6.IN4
+S[5] => and_U3_7.IN4
+S[5] => and_U3_9.IN4
+S[5] => and_U3_10.IN4
+S[5] => and_U3_12.IN4
+S[5] => and_U3_14.IN4
+S[5] => and_U3_17.IN4
+S[5] => and_U3_19.IN4
+S[5] => and_U3_22.IN4
+S[5] => and_D0_1.IN2
+S[5] => and_D0_2.IN2
+S[5] => and_D0_3.IN3
+S[5] => and_D0_4.IN2
+S[5] => and_D0_5.IN3
+S[5] => and_D0_6.IN3
+S[5] => and_D0_14.IN3
+S[5] => and_D0_20.IN2
+S[5] => and_D0_22.IN2
+S[5] => and_D0_27.IN2
+S[5] => and_D0_28.IN3
+S[5] => and_D0_30.IN3
+S[5] => and_D1_1.IN1
+S[5] => and_D1_2.IN2
+S[5] => and_D1_6.IN2
+S[5] => and_D1_9.IN2
+S[5] => and_D2_1.IN1
+S[5] => and_D2_2.IN1
+S[5] => and_D2_4.IN1
+S[5] => and_D2_5.IN1
+S[5] => and_D2_8.IN3
+S[5] => and_D3_2.IN2
+S[5] => and_D3_3.IN2
+S[5] => and_D3_5.IN3
+S[5] => and_C0_2.IN1
+S[5] => and_C0_3.IN1
+S[5] => and_C0_4.IN1
+S[5] => and_C1_1.IN0
+S[5] => and_U1_2.IN3
+S[5] => and_U1_7.IN3
+S[5] => and_U1_9.IN4
+S[5] => and_U1_11.IN3
+S[5] => and_U1_13.IN3
+S[5] => and_U1_14.IN4
+S[5] => and_U1_15.IN3
+S[5] => and_U1_18.IN4
+S[5] => and_U1_20.IN3
+S[5] => and_U1_21.IN3
+S[5] => and_U1_22.IN4
+S[5] => and_U1_24.IN3
+S[5] => and_U1_25.IN3
+S[5] => and_U1_26.IN4
+S[5] => and_U1_29.IN3
+S[5] => and_U1_31.IN4
+S[5] => and_U1_33.IN4
+S[5] => and_U1_34.IN4
+S[5] => and_U1_35.IN4
+S[5] => and_U2_4.IN3
+S[5] => and_U2_11.IN3
+S[5] => and_U2_14.IN3
+S[5] => and_U2_15.IN4
+S[5] => and_U2_18.IN4
+S[5] => and_U2_20.IN3
+S[5] => and_U2_26.IN4
+S[5] => and_U2_27.IN4
+S[5] => and_U2_30.IN3
+S[5] => and_U2_31.IN3
+S[5] => and_U2_32.IN3
+S[5] => and_U2_33.IN4
+S[5] => and_U3_3.IN4
+S[5] => and_U3_5.IN4
+S[5] => and_U3_8.IN4
+S[5] => and_U3_11.IN4
+S[5] => and_U3_13.IN4
+S[5] => and_U3_15.IN4
+S[5] => and_U3_16.IN4
+S[5] => and_U3_18.IN4
+S[5] => and_U3_20.IN4
+S[5] => and_U3_21.IN4
+S[5] => and_U3_23.IN4
+S[5] => and_U3_24.IN4
+S[5] => and_U3_25.IN4
+S[5] => and_D0_7.IN2
+S[5] => and_D0_8.IN2
+S[5] => and_D0_9.IN2
+S[5] => and_D0_10.IN3
+S[5] => and_D0_11.IN3
+S[5] => and_D0_12.IN2
+S[5] => and_D0_13.IN2
+S[5] => and_D0_15.IN3
+S[5] => and_D0_16.IN2
+S[5] => and_D0_17.IN2
+S[5] => and_D0_18.IN3
+S[5] => and_D0_19.IN3
+S[5] => and_D0_21.IN2
+S[5] => and_D0_23.IN3
+S[5] => and_D0_24.IN3
+S[5] => and_D0_29.IN3
+S[5] => and_D0_31.IN3
+S[5] => and_D1_5.IN1
+S[5] => and_D1_8.IN3
+S[5] => and_D1_10.IN2
+S[5] => and_D1_11.IN2
+S[5] => and_D2_3.IN1
+S[5] => and_D2_6.IN1
+S[5] => and_D2_7.IN2
+S[5] => and_D3_1.IN1
+S[5] => and_D3_4.IN2
+S[5] => and_C0_5.IN2
+S[6] => and_U1_1.IN4
+S[6] => and_U1_2.IN4
+S[6] => and_U1_5.IN4
+S[6] => and_U1_6.IN4
+S[6] => and_U1_7.IN4
+S[6] => and_U1_10.IN4
+S[6] => and_U1_11.IN4
+S[6] => and_U1_15.IN4
+S[6] => and_U1_20.IN4
+S[6] => and_U1_23.IN4
+S[6] => and_U1_24.IN4
+S[6] => and_U1_25.IN4
+S[6] => and_U1_27.IN5
+S[6] => and_U2_1.IN5
+S[6] => and_U2_2.IN4
+S[6] => and_U2_3.IN4
+S[6] => and_U2_4.IN4
+S[6] => and_U2_5.IN4
+S[6] => and_U2_7.IN4
+S[6] => and_U2_8.IN5
+S[6] => and_U2_9.IN5
+S[6] => and_U2_11.IN4
+S[6] => and_U2_12.IN4
+S[6] => and_U2_14.IN4
+S[6] => and_U2_15.IN5
+S[6] => and_U2_16.IN4
+S[6] => and_U2_22.IN4
+S[6] => and_U2_23.IN5
+S[6] => and_U2_26.IN5
+S[6] => and_U2_28.IN5
+S[6] => and_U2_30.IN4
+S[6] => and_U3_1.IN5
+S[6] => and_U3_2.IN5
+S[6] => and_U3_3.IN5
+S[6] => and_U3_6.IN5
+S[6] => and_U3_7.IN5
+S[6] => and_U3_8.IN5
+S[6] => and_U3_10.IN5
+S[6] => and_U3_11.IN5
+S[6] => and_U3_13.IN5
+S[6] => and_U3_17.IN5
+S[6] => and_U3_18.IN5
+S[6] => and_U3_21.IN5
+S[6] => and_D0_1.IN3
+S[6] => and_D0_2.IN3
+S[6] => and_D0_4.IN3
+S[6] => and_D0_7.IN3
+S[6] => and_D0_8.IN3
+S[6] => and_D0_12.IN3
+S[6] => and_D0_13.IN3
+S[6] => and_D0_16.IN3
+S[6] => and_D0_20.IN3
+S[6] => and_D0_21.IN3
+S[6] => and_D0_25.IN4
+S[6] => and_D0_26.IN4
+S[6] => and_D0_29.IN4
+S[6] => and_D1_2.IN3
+S[6] => and_D1_5.IN2
+S[6] => and_D1_8.IN4
+S[6] => and_D2_1.IN2
+S[6] => and_D2_6.IN2
+S[6] => and_D3_1.IN2
+S[6] => and_D3_4.IN3
+S[6] => and_D3_5.IN4
+S[6] => and_C0_2.IN2
+S[6] => and_C0_3.IN2
+S[6] => and_C0_4.IN2
+S[6] => and_C1_1.IN1
+S[6] => and_C1_2.IN1
+S[6] => and_C1_3.IN1
+S[6] => and_U1_12.IN4
+S[6] => and_U1_13.IN4
+S[6] => and_U1_17.IN4
+S[6] => and_U1_19.IN5
+S[6] => and_U1_21.IN4
+S[6] => and_U1_28.IN4
+S[6] => and_U1_29.IN4
+S[6] => and_U1_30.IN5
+S[6] => and_U1_31.IN5
+S[6] => and_U1_32.IN5
+S[6] => and_U1_33.IN5
+S[6] => and_U1_34.IN5
+S[6] => and_U1_35.IN5
+S[6] => and_U2_6.IN4
+S[6] => and_U2_10.IN5
+S[6] => and_U2_13.IN4
+S[6] => and_U2_17.IN5
+S[6] => and_U2_18.IN5
+S[6] => and_U2_19.IN4
+S[6] => and_U2_20.IN4
+S[6] => and_U2_21.IN4
+S[6] => and_U2_24.IN4
+S[6] => and_U2_25.IN5
+S[6] => and_U2_27.IN5
+S[6] => and_U2_29.IN5
+S[6] => and_U2_31.IN4
+S[6] => and_U2_32.IN4
+S[6] => and_U2_33.IN5
+S[6] => and_U2_34.IN5
+S[6] => and_U2_35.IN5
+S[6] => and_U3_4.IN5
+S[6] => and_U3_5.IN5
+S[6] => and_U3_9.IN5
+S[6] => and_U3_12.IN5
+S[6] => and_U3_14.IN5
+S[6] => and_U3_15.IN5
+S[6] => and_U3_16.IN5
+S[6] => and_U3_19.IN5
+S[6] => and_U3_20.IN5
+S[6] => and_U3_22.IN5
+S[6] => and_U3_23.IN5
+S[6] => and_U3_24.IN5
+S[6] => and_U3_25.IN5
+S[6] => and_D0_9.IN3
+S[6] => and_D0_17.IN3
+S[6] => and_D0_22.IN3
+S[6] => and_D0_27.IN3
+S[6] => and_D0_28.IN4
+S[6] => and_D0_30.IN4
+S[6] => and_D0_31.IN4
+S[6] => and_D1_3.IN2
+S[6] => and_D1_4.IN2
+S[6] => and_D1_6.IN3
+S[6] => and_D1_7.IN3
+S[6] => and_D1_9.IN3
+S[6] => and_D1_10.IN3
+S[6] => and_D1_11.IN3
+S[6] => and_D2_2.IN2
+S[6] => and_D2_3.IN2
+S[6] => and_D2_4.IN2
+S[6] => and_D2_5.IN2
+S[6] => and_D2_7.IN3
+S[6] => and_D2_8.IN4
+S[6] => and_D3_2.IN3
+S[6] => and_D3_3.IN3
+S[6] => and_C0_1.IN0
+S[7] => and_U1_1.IN5
+S[7] => and_U1_2.IN5
+S[7] => and_U1_3.IN5
+S[7] => and_U1_5.IN5
+S[7] => and_U1_6.IN5
+S[7] => and_U1_7.IN5
+S[7] => and_U1_8.IN5
+S[7] => and_U1_9.IN5
+S[7] => and_U1_11.IN5
+S[7] => and_U1_12.IN5
+S[7] => and_U1_13.IN5
+S[7] => and_U1_14.IN5
+S[7] => and_U1_19.IN6
+S[7] => and_U1_20.IN5
+S[7] => and_U1_21.IN5
+S[7] => and_U1_22.IN5
+S[7] => and_U1_30.IN6
+S[7] => and_U1_31.IN6
+S[7] => and_U2_2.IN5
+S[7] => and_U2_4.IN5
+S[7] => and_U2_5.IN5
+S[7] => and_U2_6.IN5
+S[7] => and_U2_11.IN5
+S[7] => and_U2_12.IN5
+S[7] => and_U2_13.IN5
+S[7] => and_U2_20.IN5
+S[7] => and_U2_21.IN5
+S[7] => and_U2_26.IN6
+S[7] => and_U2_27.IN6
+S[7] => and_U2_33.IN6
+S[7] => and_U3_1.IN6
+S[7] => and_U3_2.IN6
+S[7] => and_U3_3.IN6
+S[7] => and_U3_4.IN6
+S[7] => and_U3_5.IN6
+S[7] => and_U3_7.IN6
+S[7] => and_U3_8.IN6
+S[7] => and_U3_9.IN6
+S[7] => and_U3_13.IN6
+S[7] => and_U3_14.IN6
+S[7] => and_U3_15.IN6
+S[7] => and_U3_16.IN6
+S[7] => and_U3_24.IN6
+S[7] => and_D0_1.IN4
+S[7] => and_D0_2.IN4
+S[7] => and_D0_3.IN4
+S[7] => and_D0_4.IN4
+S[7] => and_D0_5.IN4
+S[7] => and_D0_6.IN4
+S[7] => and_D0_7.IN4
+S[7] => and_D0_8.IN4
+S[7] => and_D0_9.IN4
+S[7] => and_D0_10.IN4
+S[7] => and_D0_11.IN4
+S[7] => and_D0_16.IN4
+S[7] => and_D0_17.IN4
+S[7] => and_D0_18.IN4
+S[7] => and_D0_19.IN4
+S[7] => and_D0_25.IN5
+S[7] => and_D0_28.IN5
+S[7] => and_D1_1.IN2
+S[7] => and_D1_3.IN3
+S[7] => and_D1_4.IN3
+S[7] => and_D1_8.IN5
+S[7] => and_D1_9.IN4
+S[7] => and_D2_1.IN3
+S[7] => and_D2_2.IN3
+S[7] => and_D2_3.IN3
+S[7] => and_D2_7.IN4
+S[7] => and_D3_2.IN4
+S[7] => and_D3_3.IN4
+S[7] => and_D3_4.IN4
+S[7] => and_C0_1.IN1
+S[7] => and_C0_5.IN3
+S[7] => and_C1_1.IN2
+S[7] => and_C1_2.IN2
+S[7] => and_C1_3.IN2
+S[7] => and_U1_4.IN5
+S[7] => and_U1_10.IN5
+S[7] => and_U1_15.IN5
+S[7] => and_U1_16.IN5
+S[7] => and_U1_17.IN5
+S[7] => and_U1_18.IN5
+S[7] => and_U1_23.IN5
+S[7] => and_U1_24.IN5
+S[7] => and_U1_25.IN5
+S[7] => and_U1_26.IN5
+S[7] => and_U1_27.IN6
+S[7] => and_U1_28.IN5
+S[7] => and_U1_29.IN5
+S[7] => and_U1_32.IN6
+S[7] => and_U1_33.IN6
+S[7] => and_U1_34.IN6
+S[7] => and_U1_35.IN6
+S[7] => and_U2_3.IN5
+S[7] => and_U2_7.IN5
+S[7] => and_U2_14.IN5
+S[7] => and_U2_16.IN5
+S[7] => and_U2_19.IN5
+S[7] => and_U2_22.IN5
+S[7] => and_U2_24.IN5
+S[7] => and_U2_28.IN6
+S[7] => and_U2_29.IN6
+S[7] => and_U2_30.IN5
+S[7] => and_U2_31.IN5
+S[7] => and_U2_32.IN5
+S[7] => and_U2_34.IN6
+S[7] => and_U2_35.IN6
+S[7] => and_U3_6.IN6
+S[7] => and_U3_10.IN6
+S[7] => and_U3_11.IN6
+S[7] => and_U3_12.IN6
+S[7] => and_U3_17.IN6
+S[7] => and_U3_18.IN6
+S[7] => and_U3_19.IN6
+S[7] => and_U3_20.IN6
+S[7] => and_U3_21.IN6
+S[7] => and_U3_22.IN6
+S[7] => and_U3_23.IN6
+S[7] => and_U3_25.IN6
+S[7] => and_D0_12.IN4
+S[7] => and_D0_13.IN4
+S[7] => and_D0_14.IN4
+S[7] => and_D0_15.IN4
+S[7] => and_D0_20.IN4
+S[7] => and_D0_21.IN4
+S[7] => and_D0_22.IN4
+S[7] => and_D0_23.IN4
+S[7] => and_D0_24.IN4
+S[7] => and_D0_26.IN5
+S[7] => and_D0_27.IN4
+S[7] => and_D0_29.IN5
+S[7] => and_D0_30.IN5
+S[7] => and_D0_31.IN5
+S[7] => and_D1_2.IN4
+S[7] => and_D1_5.IN3
+S[7] => and_D1_7.IN4
+S[7] => and_D1_10.IN4
+S[7] => and_D1_11.IN4
+S[7] => and_D2_4.IN3
+S[7] => and_D2_5.IN3
+S[7] => and_D2_6.IN3
+S[7] => and_D3_1.IN3
+S[7] => and_D3_5.IN5
+S[7] => and_C0_2.IN3
+S[7] => and_C0_3.IN3
+S[7] => and_C0_4.IN3
+segmentsUn[0] <= decoderSaida:dec0.segments
+segmentsUn[1] <= decoderSaida:dec0.segments
+segmentsUn[2] <= decoderSaida:dec0.segments
+segmentsUn[3] <= decoderSaida:dec0.segments
+segmentsUn[4] <= decoderSaida:dec0.segments
+segmentsUn[5] <= decoderSaida:dec0.segments
+segmentsUn[6] <= decoderSaida:dec0.segments
+segmentsDez[0] <= decoderSaida:dec1.segments
+segmentsDez[1] <= decoderSaida:dec1.segments
+segmentsDez[2] <= decoderSaida:dec1.segments
+segmentsDez[3] <= decoderSaida:dec1.segments
+segmentsDez[4] <= decoderSaida:dec1.segments
+segmentsDez[5] <= decoderSaida:dec1.segments
+segmentsDez[6] <= decoderSaida:dec1.segments
+segmentsCen[0] <= decoderSaida:dec2.segments
+segmentsCen[1] <= decoderSaida:dec2.segments
+segmentsCen[2] <= decoderSaida:dec2.segments
+segmentsCen[3] <= decoderSaida:dec2.segments
+segmentsCen[4] <= decoderSaida:dec2.segments
+segmentsCen[5] <= decoderSaida:dec2.segments
+segmentsCen[6] <= decoderSaida:dec2.segments
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToBcd:convBcd|decoderSaida:dec0
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToBcd:convBcd|decoderSaida:dec1
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|binToBcd:convBcd|decoderSaida:dec2
+S[0] => and_a0.IN0
+S[0] => and_a2.IN0
+S[0] => and_a3.IN0
+S[0] => and_b0.IN0
+S[0] => and_b2.IN0
+S[0] => and_c0.IN0
+S[0] => and_d0.IN0
+S[0] => and_d2.IN0
+S[0] => and_d3.IN0
+S[0] => and_e0.IN0
+S[0] => and_e2.IN0
+S[0] => and_f1.IN0
+S[0] => and_f2.IN0
+S[0] => and_g1.IN0
+S[0] => and_a1.IN0
+S[0] => and_b1.IN0
+S[0] => and_b3.IN0
+S[0] => and_c1.IN0
+S[0] => and_c2.IN0
+S[0] => and_d1.IN0
+S[0] => and_d4.IN0
+S[0] => and_g2.IN0
+S[1] => and_a2.IN1
+S[1] => and_b1.IN1
+S[1] => and_b2.IN1
+S[1] => and_c1.IN1
+S[1] => and_c3.IN0
+S[1] => and_d2.IN1
+S[1] => and_d4.IN1
+S[1] => and_e0.IN1
+S[1] => and_f0.IN0
+S[1] => and_f1.IN1
+S[1] => and_g1.IN1
+S[1] => and_a0.IN1
+S[1] => and_a1.IN1
+S[1] => and_a3.IN1
+S[1] => and_b0.IN1
+S[1] => and_c0.IN1
+S[1] => and_d0.IN1
+S[1] => and_d1.IN1
+S[1] => and_d3.IN1
+S[1] => and_e1.IN0
+S[1] => and_e2.IN1
+S[1] => and_f2.IN1
+S[1] => and_g0.IN0
+S[1] => and_g2.IN1
+S[2] => and_a1.IN2
+S[2] => and_a3.IN2
+S[2] => and_b1.IN2
+S[2] => and_b3.IN1
+S[2] => and_c2.IN1
+S[2] => and_c3.IN1
+S[2] => and_d1.IN2
+S[2] => and_d2.IN2
+S[2] => and_e1.IN1
+S[2] => and_f2.IN2
+S[2] => and_g1.IN2
+S[2] => and_g2.IN2
+S[2] => and_a0.IN2
+S[2] => and_a2.IN2
+S[2] => and_c0.IN2
+S[2] => and_c1.IN2
+S[2] => and_d0.IN2
+S[2] => and_d3.IN2
+S[2] => and_d4.IN2
+S[2] => and_e2.IN2
+S[2] => and_f0.IN1
+S[2] => and_g0.IN1
+S[3] => and_a2.IN3
+S[3] => and_a3.IN3
+S[3] => and_b2.IN2
+S[3] => and_b3.IN2
+S[3] => and_c2.IN2
+S[3] => and_c3.IN2
+S[3] => and_d3.IN3
+S[3] => and_d4.IN3
+S[3] => and_e2.IN3
+S[3] => and_f2.IN3
+S[3] => and_g2.IN3
+S[3] => and_a0.IN3
+S[3] => and_a1.IN3
+S[3] => and_b0.IN2
+S[3] => and_c0.IN3
+S[3] => and_c1.IN3
+S[3] => and_d1.IN3
+S[3] => and_e0.IN2
+S[3] => and_e1.IN2
+S[3] => and_f0.IN2
+S[3] => and_f1.IN2
+S[3] => and_g0.IN2
+S[3] => and_g1.IN3
+segments[0] <= or_g.DB_MAX_OUTPUT_PORT_TYPE
+segments[1] <= or_f.DB_MAX_OUTPUT_PORT_TYPE
+segments[2] <= or_e.DB_MAX_OUTPUT_PORT_TYPE
+segments[3] <= or_d.DB_MAX_OUTPUT_PORT_TYPE
+segments[4] <= or_c.DB_MAX_OUTPUT_PORT_TYPE
+segments[5] <= or_b.DB_MAX_OUTPUT_PORT_TYPE
+segments[6] <= or_a.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC0|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC1|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC2|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC3|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC4|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC5
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC5|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC5|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC5|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC6
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC6|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC6|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxC6|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD0|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD1|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD2|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD3|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD4|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD5|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxD6|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU0|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU1|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU2|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU3|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU4|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU5|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6
+A => A.IN1
+B => B.IN1
+C => C.IN1
+D => D.IN1
+Selector[0] => Selector[0].IN2
+Selector[1] => Selector[1].IN1
+Y <= mux2to1:mux3.Y
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6|mux2to1:mux1
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6|mux2to1:mux2
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|main:conversor_display|mux4to1:muxU6|mux2to1:mux3
+A => And1.IN0
+B => And2.IN0
+Selector => And2.IN1
+Selector => And1.IN1
+Y <= Or0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|ULA8bit_PRINCIPAL|display7seg_OPERADOR:disp_operador
+bin[0] => and_dig_sub.IN0
+bin[0] => and_dig_and.IN0
+bin[0] => and_dig_mult.IN0
+bin[0] => and_dig_nusado.IN0
+bin[0] => and_dig.IN0
+bin[0] => and_dig_or.IN0
+bin[0] => and_dig_xor.IN0
+bin[1] => and_dig_or.IN1
+bin[1] => and_dig_and.IN1
+bin[1] => and_dig_nusado.IN1
+bin[1] => and_dig.IN1
+bin[1] => and_dig_sub.IN1
+bin[1] => and_dig_xor.IN1
+bin[1] => and_dig_mult.IN1
+bin[2] => and_dig_xor.IN2
+bin[2] => and_dig_mult.IN2
+bin[2] => and_dig_nusado.IN2
+bin[2] => and_dig.IN2
+bin[2] => and_dig_sub.IN2
+bin[2] => and_dig_or.IN2
+bin[2] => and_dig_and.IN2
+seg[0] <= seg_a.DB_MAX_OUTPUT_PORT_TYPE
+seg[1] <= seg_b.DB_MAX_OUTPUT_PORT_TYPE
+seg[2] <= seg_c.DB_MAX_OUTPUT_PORT_TYPE
+seg[3] <= seg_d.DB_MAX_OUTPUT_PORT_TYPE
+seg[4] <= seg_e.DB_MAX_OUTPUT_PORT_TYPE
+seg[5] <= seg_f.DB_MAX_OUTPUT_PORT_TYPE
+seg[6] <= seg_g.DB_MAX_OUTPUT_PORT_TYPE
+
+

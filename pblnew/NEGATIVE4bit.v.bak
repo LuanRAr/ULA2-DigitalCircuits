@@ -1,0 +1,33 @@
+// Módulo para detecção de flag de número negativo
+// 100% COMBINACIONAL - apenas portas lógicas
+module NEGATIVE4bit(
+    input  [3:0] Result,   // Resultado da operação (4 bits)
+    input  [2:0] Op,       // Código da operação (para detectar se é aritmética)
+    output       Negative  // Flag de número negativo
+);
+
+    // Detecção de número negativo APENAS para operações aritméticas
+    // Operações aritméticas: Soma (000), Subtração (001), Multiplicação (101), Divisão (110)
+    
+    // Decodificação das operações aritméticas
+    wire n_op0, n_op1, n_op2;
+    not not_op0(n_op0, Op[0]);
+    not not_op1(n_op1, Op[1]);
+    not not_op2(n_op2, Op[2]);
+    
+    // Seleção de operações aritméticas
+    wire sel_soma, sel_sub, sel_mult, sel_div, sel_aritmetica;
+    and sel_soma_and(sel_soma, n_op2, n_op1, n_op0);        // op = 000 (SOMA)
+    and sel_sub_and(sel_sub, n_op2, n_op1, Op[0]);          // op = 001 (SUBTRAÇÃO)
+    and sel_mult_and(sel_mult, Op[2], n_op1, Op[0]);         // op = 101 (MULTIPLICAÇÃO)
+    and sel_div_and(sel_div, Op[2], Op[1], n_op0);           // op = 110 (DIVISÃO)
+    
+    // OR de todas as operações aritméticas
+    or sel_aritmetica_or(sel_aritmetica, sel_soma, sel_sub, sel_mult, sel_div);
+    
+    // Flag negativa: MSB = 1 E operação aritmética
+    wire msb_negative;
+    buf msb_buf(msb_negative, Result[3]);
+    and negative_and(Negative, msb_negative, sel_aritmetica);
+
+endmodule

@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULA 8-bit - Apresentação Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 300;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .header p {
+            margin: 15px 0 0 0;
+            font-size: 1.3em;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-section {
+            padding: 40px;
+        }
+        
+        /* ===== FLUXO DE ESTADOS ===== */
+        .flow-section {
+            margin-bottom: 50px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            border-left: 6px solid #3498db;
+            animation: slideIn 0.8s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .flow-section h2 {
+            color: #2c3e50;
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: 2.5em;
+            position: relative;
+        }
+        
+        .flow-section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        .state-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .state-box {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid transparent;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        
+        .state-box:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+        }
+        
+        .state-number {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 22px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .state-content h3 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+            text-align: center;
+        }
+        
+        .state-content p {
+            margin: 8px 0;
+            color: #7f8c8d;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .state-content strong {
+            color: #2c3e50;
+        }
+        
+        .flow-arrow {
+            font-size: 3em;
+            color: #3498db;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+        
+        .loop-indicator {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-align: center;
+            margin: 30px auto;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* ===== MAPEAMENTO FPGA ===== */
+        .mapping-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #fff3cd 0%, #fff8e1 100%);
+            border-radius: 20px;
+            border-left: 6px solid #f39c12;
+        }
+        
+        .mapping-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .mapping-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid #f39c12;
+            transition: all 0.3s ease;
+        }
+        
+        .mapping-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(243, 156, 18, 0.2);
+        }
+        
+        .mapping-card h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .mapping-item {
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 3px solid #f39c12;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        /* ===== CARROSSEL DE CIRCUITOS ===== */
+        .circuit-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #d5f4e6 0%, #80ffdb 100%);
+            border-radius: 20px;
+            border-left: 6px solid #27ae60;
+        }
+        
+        .carousel-container {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            min-width: 100%;
+            background: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .carousel-slide h3 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+        
+        .carousel-slide img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+            pointer-events: none;
+        }
+        
+        .carousel-btn {
+            pointer-events: all;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            color: #2c3e50;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .carousel-indicators {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #bdc3c7;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .indicator.active {
+            background: #27ae60;
+            transform: scale(1.3);
+        }
+        
+        /* ===== TABELA ===== */
+        .table-section {
+            margin: 50px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 18px 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ecf0f1;
+            transition: background-color 0.3s ease;
+        }
+        
+        tr:hover td {
+            background-color: #f8f9fa;
+        }
+        
+        .operation {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .input {
+            background: #ecf0f1;
+            color: #2c3e50;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+        
+        .result {
+            background: #e8f5e8;
+            color: #27ae60;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+        
+        .display {
+            background: #fff3cd;
+            color: #856404;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+        
+        .flags {
+            background: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+            border-radius: 5px;
+            padding: 8px 12px;
+        }
+        
+        .flag-overflow { background: #ff6b6b; color: white; padding: 5px 10px; border-radius: 5px; margin: 2px; display: inline-block; }
+        .flag-zero { background: #4ecdc4; color: white; padding: 5px 10px; border-radius: 5px; margin: 2px; display: inline-block; }
+        .flag-negative { background: #9b59b6; color: white; padding: 5px 10px; border-radius: 5px; margin: 2px; display: inline-block; }
+        .flag-error { background: #f39c12; color: white; padding: 5px 10px; border-radius: 5px; margin: 2px; display: inline-block; }
+        .flag-fractional { background: #e67e22; color: white; padding: 5px 10px; border-radius: 5px; margin: 2px; display: inline-block; }
+        
+        .no-flags {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        /* ===== MÓDULOS ===== */
+        .modules-section {
+            margin: 50px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f1f2f6 0%, #ddd6fe 100%);
+            border-radius: 20px;
+            border-left: 6px solid #9b59b6;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-top: 4px solid #9b59b6;
+            transition: all 0.3s ease;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(155, 89, 182, 0.2);
+        }
+        
+        .module-card h3 {
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            font-size: 1.4em;
+        }
+        
+        .module-card p {
+            margin: 10px 0;
+            color: #7f8c8d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        /* ===== LEGENDA ===== */
+        .legend {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 6px solid #3498db;
+        }
+        
+        .legend h3 {
+            margin: 0 0 20px 0;
+            color: #2c3e50;
+            font-size: 1.8em;
+        }
+        
+        .legend-item {
+            display: inline-block;
+            margin: 8px 12px 8px 0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .state-flow {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 ULA 8-bit - Arquitetura Completa</h1>
+            <p>Unidade Lógica e Aritmética com Estados e Operações Encadeadas</p>
+        </div>
+        
+        <div class="content-section">
+            <!-- ===== FLUXO DE OPERAÇÕES DA ULA ===== -->
+            <div class="flow-section">
+                <h2>🚀 Fluxo de Operações da ULA</h2>
+                
+                <div class="state-flow">
+                    <div class="state-box">
+                        <div class="state-number">RESET</div>
+                        <div class="state-content">
+                            <h3>Inicialização</h3>
+                            <p><strong>Ação:</strong> Apertar KEY1 (reset)</p>
+                            <p><strong>Estado:</strong> Vai para 00</p>
+                            <p><strong>Função:</strong> Zera contador e registradores</p>
+                        </div>
+                    </div>
+                    
+                    <span class="flow-arrow">→</span>
+                    
+                    <div class="state-box">
+                        <div class="state-number">00</div>
+                        <div class="state-content">
+                            <h3>Entrada A</h3>
+                            <p><strong>Switches:</strong> SW[7:0] = Entrada A (8 bits)</p>
+                            <p><strong>Ação:</strong> Digitar valor de A</p>
+                            <p><strong>Avanço:</strong> Apertar KEY0</p>
+                            <p><em>Estado usado apenas na 1ª operação</em></p>
+                        </div>
+                    </div>
+                    
+                    <span class="flow-arrow">→</span>
+                    
+                    <div class="state-box">
+                        <div class="state-number">01</div>
+                        <div class="state-content">
+                            <h3>Entrada B</h3>
+                            <p><strong>Switches:</strong> SW[7:0] = Entrada B (8 bits)</p>
+                            <p><strong>Ação:</strong> Digitar valor de B</p>
+                            <p><strong>Avanço:</strong> Apertar KEY0</p>
+                            <p><em>Registra B_registered</em></p>
+                        </div>
+                    </div>
+                    
+                    <span class="flow-arrow">→</span>
+                    
+                    <div class="state-box">
+                        <div class="state-number">10</div>
+                        <div class="state-content">
+                            <h3>Seleção de Operação</h3>
+                            <p><strong>SW[7:5]:</strong> Operação (000-111)</p>
+                            <p><strong>SW[4:3]:</strong> Modo exibição (00-11)</p>
+                            <p><strong>Avanço:</strong> Apertar KEY0</p>
+                            <p><em>Registra OP e exibição</em></p>
+                        </div>
+                    </div>
+                    
+                    <span class="flow-arrow">→</span>
+                    
+                    <div class="state-box">
+                        <div class="state-number">11</div>
+                        <div class="state-content">
+                            <h3>Cálculo e Resultado</h3>
+                            <p><strong>Exibição:</strong> Mostra resultado nos displays</p>
+                            <p><strong>Flags:</strong> LEDs indicam condições</p>
+                            <p><strong>Avanço:</strong> Apertar KEY0</p>
+                            <p><em>Salva resultado_anterior</em></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="loop-indicator">
+                    🔄 LOOP: Estado 11 volta para 01 (operações encadeadas usam resultado_anterior)
+                </div>
+                
+                <div class="mapping-card" style="max-width: 900px; margin: 30px auto; background: #fff3e0; border-left: 4px solid #ff9800;">
+                    <h4 style="color: #2c3e50;">⚙️ Como o Contador Pula o Estado 00? (Flip-Flop Tipo T)</h4>
+                    <p style="color: #7f8c8d; line-height: 1.8; font-size: 15px; margin: 15px 0;">
+                        O contador de estados usa <strong>flip-flops tipo T</strong> com as seguintes equações:
+                    </p>
+                    <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0; font-family: 'Courier New', monospace;">
+                        <p style="margin: 8px 0; color: #2c3e50;"><strong>T0 = ~(Q1 & Q0)</strong> → Toggle Q0 exceto no estado 11</p>
+                        <p style="margin: 8px 0; color: #2c3e50;"><strong>T1 = Q0</strong> → Toggle Q1 quando Q0 = 1</p>
+                        <p style="margin: 8px 0; color: #2c3e50;"><strong>Q_novo = Q_atual ⊕ T</strong> → Lógica do flip-flop T</p>
+                    </div>
+                    <p style="color: #7f8c8d; line-height: 1.8; font-size: 15px; margin: 15px 0;">
+                        <strong>No estado 11 (Q1=1, Q0=1):</strong>
+                    </p>
+                    <div style="background: white; padding: 20px; border-radius: 8px; margin: 15px 0; font-family: 'Courier New', monospace;">
+                        <p style="margin: 8px 0; color: #e74c3c;">T0 = ~(1 & 1) = ~1 = <strong>0</strong></p>
+                        <p style="margin: 8px 0; color: #e74c3c;">T1 = 1 = <strong>1</strong></p>
+                        <p style="margin: 15px 0 8px 0; color: #2c3e50;">Ao apertar KEY0:</p>
+                        <p style="margin: 8px 0; color: #27ae60;">Q0_novo = 1 ⊕ 0 = <strong>1</strong></p>
+                        <p style="margin: 8px 0; color: #27ae60;">Q1_novo = 1 ⊕ 1 = <strong>0</strong></p>
+                        <p style="margin: 15px 0 8px 0; color: #2c3e50; font-weight: bold;">Resultado: <strong>01</strong> (pula o 00!)</p>
+                    </div>
+                    <p style="color: #7f8c8d; line-height: 1.8; font-size: 15px;">
+                        <strong>Por quê funciona?</strong> A equação T0 = ~(Q1 & Q0) garante que T0 = 0 apenas no estado 11. 
+                        Quando T0 = 0, Q0 não muda (permanece 1), e como T1 = 1, Q1 inverte (1→0). 
+                        Resultado: <strong>11 → 01</strong>, pulando o estado 00! Isso permite que operações encadeadas 
+                        usem automaticamente o <code>resultado_anterior</code> sem precisar digitar A novamente.
+                    </p>
+                </div>
+                
+                <div class="mapping-card" style="max-width: 800px; margin: 30px auto; background: #e8f5e9;">
+                    <h4>💡 Operações Encadeadas</h4>
+                    <p style="color: #2c3e50; line-height: 1.8; font-size: 15px;">
+                        Após a primeira operação, o <strong>estado 00 é pulado</strong>. O sistema usa automaticamente o 
+                        <strong>resultado_anterior</strong> como operando A, permitindo cálculos consecutivos sem 
+                        reiniciar. Ex: (2 × 3) + 5 = 11
+                    </p>
+                </div>
+            </div>
+            
+            <!-- ===== MAPEAMENTO DA FPGA ===== -->
+            <div class="mapping-section">
+                <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px; font-size: 2.5em;">📍 Mapeamento dos Componentes da FPGA</h2>
+                
+                <div class="mapping-grid">
+                    <div class="mapping-card">
+                        <h4>🎚️ Switches (Entradas)</h4>
+                        <div class="mapping-item"><strong>SW[7:0]</strong> - Entrada de dados (A, B) ou controle</div>
+                        <div class="mapping-item"><strong>SW[7:5]</strong> - Código da operação (estado 10)</div>
+                        <div class="mapping-item"><strong>SW[4:3]</strong> - Seleção de exibição (estado 10)</div>
+                        <div class="mapping-item"><strong>SW[2:0]</strong> - Bits de dados (estados 00, 01)</div>
+                    </div>
+                    
+                    <div class="mapping-card">
+                        <h4>🔘 Botões (Controle)</h4>
+                        <div class="mapping-item"><strong>KEY[0]</strong> - Advance (avança estados)</div>
+                        <div class="mapping-item"><strong>KEY[1]</strong> - Reset (volta ao estado 00)</div>
+                        <div class="mapping-item">⚠️ Botões são <strong>ativos baixos</strong></div>
+                        <div class="mapping-item">Debounce: 3 flip-flops em cascata</div>
+                    </div>
+                    
+                    <div class="mapping-card">
+                        <h4>💡 LEDs (Saídas)</h4>
+                        <div class="mapping-item"><strong>LEDR[7:0]</strong> - Resultado (8 bits)</div>
+                        <div class="mapping-item"><strong>LEDR[8]</strong> - Flag Overflow</div>
+                        <div class="mapping-item"><strong>LEDR[9]</strong> - Flag Zero</div>
+                        <div class="mapping-item"><strong>LEDR[10]</strong> - Flag Negative</div>
+                        <div class="mapping-item"><strong>LEDR[11]</strong> - Flag Error</div>
+                    </div>
+                    
+                    <div class="mapping-card">
+                        <h4>📟 Displays 7 Segmentos</h4>
+                        <div class="mapping-item"><strong>HEX0</strong> - Unidade</div>
+                        <div class="mapping-item"><strong>HEX1</strong> - Dezena</div>
+                        <div class="mapping-item"><strong>HEX2</strong> - Centena</div>
+                        <div class="mapping-item">Modos: Octal, Hexadecimal, Decimal</div>
+                    </div>
+                    
+                    <div class="mapping-card">
+                        <h4>🔄 Contador de Estados</h4>
+                        <div class="mapping-item"><strong>00</strong> - Entrada A (1ª operação)</div>
+                        <div class="mapping-item"><strong>01</strong> - Entrada B</div>
+                        <div class="mapping-item"><strong>10</strong> - Seleção OP + exibição</div>
+                        <div class="mapping-item"><strong>11</strong> - Cálculo e resultado</div>
+                        </div>
+                    
+                    <div class="mapping-card">
+                        <h4>⚙️ Operações Disponíveis</h4>
+                        <div class="mapping-item"><strong>000</strong> - SOMA</div>
+                        <div class="mapping-item"><strong>001</strong> - SUBTRAÇÃO</div>
+                        <div class="mapping-item"><strong>010</strong> - OR</div>
+                        <div class="mapping-item"><strong>011</strong> - AND</div>
+                        <div class="mapping-item"><strong>100</strong> - XOR</div>
+                        <div class="mapping-item"><strong>101</strong> - MULTIPLICAÇÃO</div>
+                        <div class="mapping-item"><strong>110</strong> - DIVISÃO</div>
+                        <div class="mapping-item"><strong>111</strong> - NOT</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== CARROSSEL DE CIRCUITOS ===== -->
+            <div class="circuit-section">
+                <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px; font-size: 2.5em;">⚡ Circuitos das Operações</h2>
+                
+                <div class="carousel-container">
+                    <div class="carousel-slides" id="carouselSlides">
+                        <div class="carousel-slide">
+                            <h3>🔧 ULA 8-bit - Visão Geral</h3>
+                            <img src="ulacompleta.jpeg" alt="Circuito ULA Geral">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Arquitetura completa da ULA com todas as operações</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>➕ Somador 1-bit (Full Adder)</h3>
+                            <img src="Somador1bit.png" alt="Circuito Somador 1-bit">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Bloco básico: soma A + B + Cin → Sum, Cout</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>➕ Somador 8-bit</h3>
+                            <img src="somador8bits.png" alt="Circuito Somador 8-bit">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Dois somadores de 4-bit em cascata com propagação de carry</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>➖ Subtrator 1-bit</h3>
+                            <img src="Subtrator1bit.png" alt="Circuito Subtrator 1-bit">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Subtração usando complemento de 2: A - B</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>➗ Divisor 8-bit</h3>
+                            <img src="divisor.jpg" alt="Circuito Divisor">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Divisão por números específicos (1,2,3,4,5,6,7,8,9,10,12,15)</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>✖️ Multiplicador 8-bit</h3>
+                            <img src="mult.jpeg" alt="Circuito Multiplicador">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Produtos parciais com somadores em cascata</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>🔄 NOT (Inversor)</h3>
+                            <img src="not.jpeg" alt="Circuito NOT">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Inversão: entrada A → saída Ā</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>🔗 OR 1-bit</h3>
+                            <img src="or1bit.jpg" alt="Circuito OR">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Porta lógica OR: A + B</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>⚡ XOR 1-bit</h3>
+                            <img src="xor1bit.jpg" alt="Circuito XOR">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Porta lógica XOR: A ⊕ B (ou-exclusivo)</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>🔒 AND 1-bit</h3>
+                            <img src="and1bit.jpg" alt="Circuito AND">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Porta lógica AND: A · B</p>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <h3>📟 Display de 7 Segmentos</h3>
+                            <img src="display7.jpg" alt="Circuito Display 7 Segmentos">
+                            <p style="margin-top: 20px; color: #7f8c8d;">Decodificador BIN → 7 Segmentos para exibição visual</p>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-buttons">
+                        <button class="carousel-btn" onclick="moveCarousel(-1)">❮</button>
+                        <button class="carousel-btn" onclick="moveCarousel(1)">❯</button>
+                    </div>
+                </div>
+                
+                <div class="carousel-indicators" id="indicators"></div>
+            </div>
+            
+            <!-- ===== TABELA DE TESTES ===== -->
+            <div class="table-section">
+                <h2 style="margin-top: 40px; margin-bottom: 30px; color: #2c3e50; text-align: center; font-size: 2.5em;">📊 Testes de Operações Encadeadas</h2>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #f39c12;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">🔄 Sobre Operações Encadeadas</h3>
+                    <p style="color: #7f8c8d; line-height: 1.8; font-size: 15px;">
+                        Após a <strong>primeira operação</strong>, o sistema automaticamente usa o <strong>resultado anterior</strong> 
+                        como operando A nas operações seguintes. Isso permite fazer cálculos consecutivos sem precisar reiniciar.
+                        <br><strong>Exemplo:</strong> (2 + 3) + 4 = 9 → O resultado 5 é usado automaticamente na próxima soma.
+                    </p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sequência</th>
+                            <th>Operação</th>
+                            <th>Entrada (A, B, OP)</th>
+                            <th>Resultado</th>
+                            <th>Flags</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- RESET -->
+                        <tr style="background: #e8f5e9;">
+                            <td colspan="5" style="text-align: left; font-weight: bold; color: #27ae60; padding: 15px;">
+                                🔄 RESET - Inicialização do Sistema (KEY1)
+                            </td>
+                        </tr>
+                        
+                        <!-- SOMA 1 -->
+                        <tr>
+                            <td><strong>1ª</strong></td>
+                            <td class="operation">2 + 3 = 5</td>
+                            <td class="input">A=2, B=3, OP=000<br><small>A=00000010 | B=00000011</small></td>
+                            <td class="result">5 (00000101)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- SOMA 2 (ENCADEADA) -->
+                        <tr>
+                            <td><strong>2ª</strong></td>
+                            <td class="operation">5 + 4 = 9</td>
+                            <td class="input">B=4, OP=000<br><small>A=00000101 | B=00000100</small></td>
+                            <td class="result">9 (00001001)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- SUBTRAÇÃO 1 (ENCADEADA) -->
+                        <tr>
+                            <td><strong>3ª</strong></td>
+                            <td class="operation">9 - 2 = 7</td>
+                            <td class="input">B=2, OP=001<br><small>A=00001001 | B=00000010</small></td>
+                            <td class="result">7 (00000111)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- SUBTRAÇÃO 2 (ENCADEADA) -->
+                        <tr>
+                            <td><strong>4ª</strong></td>
+                            <td class="operation">7 - 3 = 4</td>
+                            <td class="input">B=3, OP=001<br><small>A=00000111 | B=00000011</small></td>
+                            <td class="result">4 (00000100)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- MULTIPLICAÇÃO (ENCADEADA) -->
+                        <tr>
+                            <td><strong>5ª</strong></td>
+                            <td class="operation">4 × 3 = 12</td>
+                            <td class="input">B=3, OP=101<br><small>A=00000100 | B=00000011</small></td>
+                            <td class="result">12 (00001100)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- DIVISÃO (ENCADEADA) -->
+                        <tr>
+                            <td><strong>6ª</strong></td>
+                            <td class="operation">12 ÷ 4 = 3</td>
+                            <td class="input">B=4, OP=110<br><small>A=00001100 | B=00000100</small></td>
+                            <td class="result">3 (00000011)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- AND (ENCADEADA) -->
+                        <tr>
+                            <td><strong>7ª</strong></td>
+                            <td class="operation">3 AND 7 = 3</td>
+                            <td class="input">B=7, OP=011<br><small>A=00000011 | B=00000111</small></td>
+                            <td class="result">3 (00000011)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- OR (ENCADEADA) -->
+                        <tr>
+                            <td><strong>8ª</strong></td>
+                            <td class="operation">3 OR 12 = 15</td>
+                            <td class="input">B=12, OP=010<br><small>A=00000011 | B=00001100</small></td>
+                            <td class="result">15 (00001111)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- XOR (ENCADEADA) -->
+                        <tr>
+                            <td><strong>9ª</strong></td>
+                            <td class="operation">15 XOR 10 = 5</td>
+                            <td class="input">B=10, OP=100<br><small>A=00001111 | B=00001010</small></td>
+                            <td class="result">5 (00000101)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                        
+                        <!-- NOT (ENCADEADA - NEGA O RESULTADO) -->
+                        <tr>
+                            <td><strong>10ª</strong></td>
+                            <td class="operation">NOT 5 = 250</td>
+                            <td class="input">OP=111<br><small>A=00000101</small></td>
+                            <td class="result">250 (11111010)</td>
+                            <td class="no-flags">Nenhuma</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #2196f3;">
+                    <p style="color: #2c3e50; line-height: 1.8; font-size: 15px;">
+                        <strong>💡 Observação:</strong> Da 2ª operação em diante, o valor de A não é mais digitado, 
+                        pois o sistema usa automaticamente o <strong>resultado_anterior</strong>. Você só precisa 
+                        digitar o novo valor de B e a operação desejada!
+                    </p>
+                </div>
+            </div>
+            
+            <!-- ===== TABELA DE TESTES DE FLAGS ===== -->
+            <div class="table-section" style="margin-top: 60px;">
+                <h2 style="margin-bottom: 30px; color: #2c3e50; text-align: center; font-size: 2.5em;">🚩 Testes de Flags</h2>
+                
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 5px solid #e74c3c;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">⚠️ Sobre os Testes de Flags</h3>
+                    <p style="color: #7f8c8d; line-height: 1.8; font-size: 15px;">
+                        Estes testes demonstram o funcionamento das <strong>flags de erro e condições especiais</strong>. 
+                        Cada teste inicia com um <strong>RESET</strong> (KEY1) para garantir que começamos do zero.
+                        As flags indicam situações como overflow, resultado negativo, divisão por zero e resultado zerado.
+                    </p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Teste</th>
+                            <th>Objetivo</th>
+                            <th>Operação</th>
+                            <th>Entrada (A, B, OP)</th>
+                            <th>Resultado</th>
+                            <th>Flags Ativas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- TESTE OVERFLOW -->
+                        <tr style="background: #fff3cd;">
+                            <td colspan="6" style="text-align: left; font-weight: bold; color: #f39c12; padding: 15px;">
+                                🔄 RESET - Teste 1: Flag OVERFLOW
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td style="color: #7f8c8d; font-style: italic;">Soma que excede 8 bits</td>
+                            <td class="operation">200 + 100 = 300</td>
+                            <td class="input">A=200, B=100, OP=000<br><small>A=11001000 | B=01100100</small></td>
+                            <td class="result">44 (00101100)</td>
+                            <td class="flags">
+                                <span class="flag-overflow">Overflow</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left; color: #7f8c8d; padding: 10px 15px; font-size: 14px;">
+                                ℹ️ <strong>Explicação:</strong> 200 + 100 = 300, mas 8 bits só armazenam até 255. 
+                                Resultado real: 300 - 256 = 44. Flag Overflow indica que houve estouro!
+                            </td>
+                        </tr>
+                        
+                        <!-- TESTE NEGATIVE -->
+                        <tr style="background: #fff3cd;">
+                            <td colspan="6" style="text-align: left; font-weight: bold; color: #f39c12; padding: 15px;">
+                                🔄 RESET - Teste 2: Flag NEGATIVE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2</strong></td>
+                            <td style="color: #7f8c8d; font-style: italic;">Subtração com resultado negativo</td>
+                            <td class="operation">10 - 50 = -40</td>
+                            <td class="input">A=10, B=50, OP=001<br><small>A=00001010 | B=00110010</small></td>
+                            <td class="result">216 (11011000)</td>
+                            <td class="flags">
+                                <span class="flag-negative">Negative</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left; color: #7f8c8d; padding: 10px 15px; font-size: 14px;">
+                                ℹ️ <strong>Explicação:</strong> 10 - 50 = -40 em complemento de 2 = 216 (bit 7 = 1). 
+                                Flag Negative indica número negativo!
+                            </td>
+                        </tr>
+                        
+                        <!-- TESTE ERROR (DIVISÃO POR ZERO) -->
+                        <tr style="background: #fff3cd;">
+                            <td colspan="6" style="text-align: left; font-weight: bold; color: #f39c12; padding: 15px;">
+                                🔄 RESET - Teste 3: Flag ERROR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>3</strong></td>
+                            <td style="color: #7f8c8d; font-style: italic;">Divisão por zero</td>
+                            <td class="operation">50 ÷ 0 = ERRO</td>
+                            <td class="input">A=50, B=0, OP=110<br><small>A=00110010 | B=00000000</small></td>
+                            <td class="result">0 (00000000)</td>
+                            <td class="flags">
+                                <span class="flag-zero">Zero</span>
+                                <span class="flag-error">Error</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left; color: #7f8c8d; padding: 10px 15px; font-size: 14px;">
+                                ℹ️ <strong>Explicação:</strong> Divisão por zero é matematicamente indefinida. 
+                                Flag Error acende e resultado retorna 0!
+                            </td>
+                        </tr>
+                        
+                        <!-- TESTE ZERO -->
+                        <tr style="background: #fff3cd;">
+                            <td colspan="6" style="text-align: left; font-weight: bold; color: #f39c12; padding: 15px;">
+                                🔄 RESET - Teste 4: Flag ZERO
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td style="color: #7f8c8d; font-style: italic;">Resultado zerado</td>
+                            <td class="operation">0 + 0 = 0</td>
+                            <td class="input">A=0, B=0, OP=000<br><small>A=00000000 | B=00000000</small></td>
+                            <td class="result">0 (00000000)</td>
+                            <td class="flags">
+                                <span class="flag-zero">Zero</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left; color: #7f8c8d; padding: 10px 15px; font-size: 14px;">
+                                ℹ️ <strong>Explicação:</strong> Quando o resultado é 0 (todos os 8 bits = 0), 
+                                a Flag Zero acende para indicar essa condição especial!
+                            </td>
+                        </tr>
+                        
+                        <!-- TESTE ADICIONAL: FRACTIONAL -->
+                        <tr style="background: #fff3cd;">
+                            <td colspan="6" style="text-align: left; font-weight: bold; color: #f39c12; padding: 15px;">
+                                🔄 RESET - Teste 5: Flag FRACTIONAL
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>5</strong></td>
+                            <td style="color: #7f8c8d; font-style: italic;">Divisão com resto</td>
+                            <td class="operation">10 ÷ 3 = 3 resto 1</td>
+                            <td class="input">A=10, B=3, OP=110<br><small>A=00001010 | B=00000011</small></td>
+                            <td class="result">3 (00000011)</td>
+                            <td class="flags">
+                                <span class="flag-fractional">Fractional</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: left; color: #7f8c8d; padding: 10px 15px; font-size: 14px;">
+                                ℹ️ <strong>Explicação:</strong> 10 ÷ 3 = 3 com resto 1. 
+                                Flag Fractional indica que a divisão não é exata (tem resto)!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="background: #f1f8e9; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #8bc34a;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px;">📌 Resumo das Flags Testadas</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px;">
+                            <span class="flag-overflow" style="display: inline-block; margin-bottom: 10px;">Overflow</span>
+                            <p style="color: #7f8c8d; font-size: 13px; margin: 0;">Resultado excede 8 bits (> 255)</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px;">
+                            <span class="flag-negative" style="display: inline-block; margin-bottom: 10px;">Negative</span>
+                            <p style="color: #7f8c8d; font-size: 13px; margin: 0;">Resultado negativo (bit 7 = 1)</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px;">
+                            <span class="flag-error" style="display: inline-block; margin-bottom: 10px;">Error</span>
+                            <p style="color: #7f8c8d; font-size: 13px; margin: 0;">Divisão por zero</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px;">
+                            <span class="flag-zero" style="display: inline-block; margin-bottom: 10px;">Zero</span>
+                            <p style="color: #7f8c8d; font-size: 13px; margin: 0;">Resultado = 0</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px;">
+                            <span class="flag-fractional" style="display: inline-block; margin-bottom: 10px;">Fractional</span>
+                            <p style="color: #7f8c8d; font-size: 13px; margin: 0;">Divisão com resto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== MÓDULOS ESPECÍFICOS ===== -->
+            <div class="modules-section">
+                <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px; font-size: 2.5em;">🔧 Módulos Específicos da ULA</h2>
+                <div class="modules-grid">
+                    <div class="module-card">
+                        <h3>➕ Addition8bit</h3>
+                        <p><strong>Função:</strong> Soma de 8 bits usando dois somadores de 4 bits</p>
+                        <p><strong>Entradas:</strong> A[7:0], B[7:0], Cin</p>
+                        <p><strong>Saídas:</strong> Sum[7:0], Cout</p>
+                        <p><strong>Técnica:</strong> Ripple carry com propagação em cascata</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>➖ SUB8bit</h3>
+                        <p><strong>Função:</strong> Subtração usando complemento de 2</p>
+                        <p><strong>Entradas:</strong> A[7:0], B[7:0]</p>
+                        <p><strong>Saídas:</strong> Result[7:0], Borrow</p>
+                        <p><strong>Cálculo:</strong> A - B = A + (~B + 1)</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>✖️ MULT8bit</h3>
+                        <p><strong>Função:</strong> Multiplicação 8x8 com produtos parciais</p>
+                        <p><strong>Saídas:</strong> Result[7:0] (apenas 8 bits baixos), Overflow</p>
+                        <p><strong>Overflow:</strong> Quando resultado > 255</p>
+                        <p><strong>100% Combinacional</strong> com portas lógicas</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>➗ DIV8bit</h3>
+                        <p><strong>Função:</strong> Divisão para divisores específicos</p>
+                        <p><strong>Divisores:</strong> 1,2,3,4,5,6,7,8,9,10,12,15</p>
+                        <p><strong>Saídas:</strong> Quotient, Remainder, Error, Fractional</p>
+                        <p><strong>Limitação:</strong> Outros divisores retornam 0</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>🔀 MUX8x8</h3>
+                        <p><strong>Função:</strong> Seletor de resultado final</p>
+                        <p><strong>Entradas:</strong> 8 resultados de 8 bits</p>
+                        <p><strong>Seleção:</strong> OP_registered[2:0]</p>
+                        <p><strong>Saída:</strong> Result[7:0]</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>🚩 FLAGS8bit</h3>
+                        <p><strong>Função:</strong> Detecção de condições especiais</p>
+                        <p><strong>Flags:</strong> Overflow, Zero, Negative, Error</p>
+                        <p><strong>Overflow:</strong> SOMA/SUB/MULT</p>
+                        <p><strong>Error:</strong> Divisão por zero</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>🔄 contador_estados</h3>
+                        <p><strong>Função:</strong> Controla sequência de estados</p>
+                        <p><strong>Estados:</strong> 00 → 01 → 10 → 11 → 01 (loop)</p>
+                        <p><strong>Controle:</strong> KEY[0] avança, KEY[1] reseta</p>
+                        <p><strong>Detecção:</strong> Borda de descida em KEY[0]</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>💾 DFF8bit_simples</h3>
+                        <p><strong>Função:</strong> Registrador de 8 bits com enable</p>
+                        <p><strong>Registra:</strong> A, B, Resultado</p>
+                        <p><strong>Enable:</strong> Controla quando carregar</p>
+                        <p><strong>Reset:</strong> Ativo baixo (KEY[1])</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>🔌 debounce</h3>
+                        <p><strong>Função:</strong> Remove bounce dos botões</p>
+                        <p><strong>Técnica:</strong> 3 flip-flops em cascata</p>
+                        <p><strong>Simples e eficiente</strong> para placa e simulação</p>
+                        <p><strong>Sincroniza</strong> sinais com o clock</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>🎯 mux_operando</h3>
+                        <p><strong>Função:</strong> Escolhe primeiro operando</p>
+                        <p><strong>Seleção:</strong> A_registered ou resultado_anterior</p>
+                        <p><strong>Lógica:</strong> Se resultado_anterior ≠ 0, usa ele</p>
+                        <p><strong>Permite:</strong> Operações encadeadas</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>📟 main (conversor display)</h3>
+                        <p><strong>Função:</strong> Converte resultado para displays</p>
+                        <p><strong>Modos:</strong> Octal, Hexadecimal, Decimal</p>
+                        <p><strong>Displays:</strong> HEX0 (un), HEX1 (dez), HEX2 (cen)</p>
+                        <p><strong>Seleção:</strong> SW[4:3] no estado 10</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <h3>📦 registrador_resultado</h3>
+                        <p><strong>Função:</strong> Armazena resultado + overflow (9 bits)</p>
+                        <p><strong>Formato:</strong> {overflow[8], resultado[7:0]}</p>
+                        <p><strong>Enable:</strong> Pulsa 1 vez no estado 11</p>
+                        <p><strong>Crítico:</strong> Para operações encadeadas</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ===== LEGENDA ===== -->
+            <div class="legend">
+                <h3>📋 Legenda das Flags</h3>
+                <span class="legend-item flag-overflow">Overflow - Resultado não cabe em 8 bits</span>
+                <span class="legend-item flag-zero">Zero - Resultado é zero</span>
+                <span class="legend-item flag-negative">Negative - Resultado negativo (bit 7 = 1)</span>
+                <span class="legend-item flag-error">Error - Divisão por zero</span>
+                <span class="legend-item flag-fractional">Fractional - Divisão com resto</span>
+                
+                <p style="margin-top: 20px; color: #7f8c8d; font-size: 14px; line-height: 1.6;">
+                    <strong>Nota:</strong> Todas as operações foram testadas e validadas através de simulação no waveform do Quartus Prime.
+                    O circuito é 100% combinacional (exceto registradores) usando apenas portas lógicas primitivas.
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🔬 ULA 8-bit - Projeto Completo de Circuitos Digitais</p>
+            <p>Implementação com Estados, Operações Encadeadas e Detecção de Flags</p>
+            <p style="margin-top: 15px; font-size: 16px; opacity: 0.9;">Desenvolvido por <strong>Henrique Zeu</strong></p>
+        </div>
+    </div>
+    
+    <script>
+        // ===== CARROSSEL =====
+        let currentSlide = 0;
+        const totalSlides = 11;  // 11 circuitos diferentes
+        
+        // Criar indicadores
+        const indicatorsContainer = document.getElementById('indicators');
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('span');
+            indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+            indicator.onclick = () => goToSlide(i);
+            indicatorsContainer.appendChild(indicator);
+        }
+        
+        function moveCarousel(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+        
+        function updateCarousel() {
+            const slides = document.getElementById('carouselSlides');
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Atualizar indicadores
+            const indicators = document.querySelectorAll('.indicator');
+            indicators.forEach((ind, idx) => {
+                ind.className = 'indicator' + (idx === currentSlide ? ' active' : '');
+            });
+        }
+        
+        // Auto-advance (opcional)
+        // setInterval(() => moveCarousel(1), 5000);
+    </script>
+</body>
+</html>

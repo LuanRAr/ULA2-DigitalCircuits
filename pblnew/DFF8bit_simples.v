@@ -1,0 +1,20 @@
+// Flip-flop D de 8 bits usando 8 flip-flops de 1 bit
+module DFF8bit_simples(
+    input  [7:0] D,      // Entrada de dados de 8 bits
+    input        clk,    // Clock (borda de subida)
+    input        rst,    // Reset (ativo baixo)
+    input        en,     // Enable (carrega quando en=1)
+    output [7:0] Q       // Saída de 8 bits
+);
+    
+    // 8 flip-flops D individuais
+    DFF_simples dff0(.d(D[0]), .clk(clk), .rst(rst), .en(en), .q(Q[0]));
+    DFF_simples dff1(.d(D[1]), .clk(clk), .rst(rst), .en(en), .q(Q[1]));
+    DFF_simples dff2(.d(D[2]), .clk(clk), .rst(rst), .en(en), .q(Q[2]));
+    DFF_simples dff3(.d(D[3]), .clk(clk), .rst(rst), .en(en), .q(Q[3]));
+    DFF_simples dff4(.d(D[4]), .clk(clk), .rst(rst), .en(en), .q(Q[4]));
+    DFF_simples dff5(.d(D[5]), .clk(clk), .rst(rst), .en(en), .q(Q[5]));
+    DFF_simples dff6(.d(D[6]), .clk(clk), .rst(rst), .en(en), .q(Q[6]));
+    DFF_simples dff7(.d(D[7]), .clk(clk), .rst(rst), .en(en), .q(Q[7]));
+    
+endmodule

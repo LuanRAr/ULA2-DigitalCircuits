@@ -1,0 +1,124 @@
+// testar o mux8x - funcionou 16/09
+module MUX8x4(
+    input  [3:0] in0,  // Entrada 0: Resultado da SOMA (op=000)
+    input  [3:0] in1,  // Entrada 1: Resultado da SUBTRAÇÃO (op=001)
+    input  [3:0] in2,  // Entrada 2: Resultado da OR lógica (op=010)
+    input  [3:0] in3,  // Entrada 3: Resultado da AND lógica (op=011)
+    input  [3:0] in4,  // Entrada 4: Resultado da XOR lógica (op=100)
+    input  [3:0] in5,  // Entrada 5: Resultado da MULTIPLICAÇÃO (op=101)
+    input  [3:0] in6,  // Entrada 6: Resultado da DIVISÃO (op=110)
+    input  [3:0] in7,  // Entrada 7: Não usado (op=111)
+    input  [2:0] sel,  // Sinal de seleção da operação (3 bits)
+    output [3:0] out   // Resultado final selecionado (4 bits)
+);
+
+    // Inversões dos bits de seleção (para facilitar a decodificação)
+    wire n0, n1, n2;
+    not inv0(n0, sel[0]);  // n0 = NOT(sel[0])
+    not inv1(n1, sel[1]);  // n1 = NOT(sel[1])
+    not inv2(n2, sel[2]);  // n2 = NOT(sel[2])
+
+    // Decodificação das seleções - apenas uma será 1, as outras serão 0
+    wire sel0, sel1, sel2, sel3, sel4, sel5, sel6, sel7;
+    
+    // sel = 000 → SOMA (in0)
+    and dec0(sel0, n2, n1, n0);
+    
+    // sel = 001 → SUBTRAÇÃO (in1)
+    and dec1(sel1, n2, n1, sel[0]);
+    
+    // sel = 010 → OR lógica (in2)
+    and dec2(sel2, n2, sel[1], n0);
+    
+    // sel = 011 → AND lógica (in3)
+    and dec3(sel3, n2, sel[1], sel[0]);
+    
+    // sel = 100 → XOR lógica (in4)
+    and dec4(sel4, sel[2], n1, n0);
+    
+    // sel = 101 → MULTIPLICAÇÃO (in5)
+    and dec5(sel5, sel[2], n1, sel[0]);
+    
+    // sel = 110 → DIVISÃO (in6)
+    and dec6(sel6, sel[2], sel[1], n0);
+    
+    // sel = 111 → Não usado (in7)
+    and dec7(sel7, sel[2], sel[1], sel[0]);
+
+    // Seleção de cada bit da saída (4 bits total)
+    // Para cada bit, seleciona o valor da entrada correspondente ao seletor ativo
+    
+    // Bit 0 (menos significativo)
+    wire out0_temp0, out0_temp1, out0_temp2, out0_temp3;
+    and a0_0(out0_temp0, in0[0], sel0);  // SOMA[0] se sel0=1
+    and a0_1(out0_temp1, in1[0], sel1);  // SUBTRAÇÃO[0] se sel1=1
+    and a0_2(out0_temp2, in2[0], sel2);  // OR[0] se sel2=1
+    and a0_3(out0_temp3, in3[0], sel3);  // AND[0] se sel3=1
+    
+    wire out0_temp4, out0_temp5, out0_temp6, out0_temp7;
+    and a0_4(out0_temp4, in4[0], sel4);  // XOR[0] se sel4=1
+    and a0_5(out0_temp5, in5[0], sel5);  // MULTIPLICAÇÃO[0] se sel5=1
+    and a0_6(out0_temp6, in6[0], sel6);  // DIVISÃO[0] se sel6=1
+    and a0_7(out0_temp7, in7[0], sel7);  // Não usado[0] se sel7=1
+    
+    // União dos resultados (apenas um será diferente de 0)
+    wire out0_temp8, out0_temp9;
+    or o0_0(out0_temp8, out0_temp0, out0_temp1, out0_temp2, out0_temp3);
+    or o0_1(out0_temp9, out0_temp4, out0_temp5, out0_temp6, out0_temp7);
+    or o0_final(out[0], out0_temp8, out0_temp9);
+
+    // Bit 1
+    wire out1_temp0, out1_temp1, out1_temp2, out1_temp3;
+    and a1_0(out1_temp0, in0[1], sel0);  // SOMA[1] se sel0=1
+    and a1_1(out1_temp1, in1[1], sel1);  // SUBTRAÇÃO[1] se sel1=1
+    and a1_2(out1_temp2, in2[1], sel2);  // OR[1] se sel2=1
+    and a1_3(out1_temp3, in3[1], sel3);  // AND[1] se sel3=1
+    
+    wire out1_temp4, out1_temp5, out1_temp6, out1_temp7;
+    and a1_4(out1_temp4, in4[1], sel4);  // XOR[1] se sel4=1
+    and a1_5(out1_temp5, in5[1], sel5);  // MULTIPLICAÇÃO[1] se sel5=1
+    and a1_6(out1_temp6, in6[1], sel6);  // DIVISÃO[1] se sel6=1
+    and a1_7(out1_temp7, in7[1], sel7);  // Não usado[1] se sel7=1
+    
+    wire out1_temp8, out1_temp9;
+    or o1_0(out1_temp8, out1_temp0, out1_temp1, out1_temp2, out1_temp3);
+    or o1_1(out1_temp9, out1_temp4, out1_temp5, out1_temp6, out1_temp7);
+    or o1_final(out[1], out1_temp8, out1_temp9);
+
+    // Bit 2
+    wire out2_temp0, out2_temp1, out2_temp2, out2_temp3;
+    and a2_0(out2_temp0, in0[2], sel0);  // SOMA[2] se sel0=1
+    and a2_1(out2_temp1, in1[2], sel1);  // SUBTRAÇÃO[2] se sel1=1
+    and a2_2(out2_temp2, in2[2], sel2);  // OR[2] se sel2=1
+    and a2_3(out2_temp3, in3[2], sel3);  // AND[2] se sel3=1
+    
+    wire out2_temp4, out2_temp5, out2_temp6, out2_temp7;
+    and a2_4(out2_temp4, in4[2], sel4);  // XOR[2] se sel4=1
+    and a2_5(out2_temp5, in5[2], sel5);  // MULTIPLICAÇÃO[2] se sel5=1
+    and a2_6(out2_temp6, in6[2], sel6);  // DIVISÃO[2] se sel6=1
+    and a2_7(out2_temp7, in7[2], sel7);  // Não usado[2] se sel7=1
+    
+    wire out2_temp8, out2_temp9;
+    or o2_0(out2_temp8, out2_temp0, out2_temp1, out2_temp2, out2_temp3);
+    or o2_1(out2_temp9, out2_temp4, out2_temp5, out2_temp6, out2_temp7);
+    or o2_final(out[2], out2_temp8, out2_temp9);
+
+    // Bit 3 (mais significativo)
+    wire out3_temp0, out3_temp1, out3_temp2, out3_temp3;
+    and a3_0(out3_temp0, in0[3], sel0);  // SOMA[3] se sel0=1
+    and a3_1(out3_temp1, in1[3], sel1);  // SUBTRAÇÃO[3] se sel1=1
+    and a3_2(out3_temp2, in2[3], sel2);  // OR[3] se sel2=1
+    and a3_3(out3_temp3, in3[3], sel3);  // AND[3] se sel3=1
+    
+    wire out3_temp4, out3_temp5, out3_temp6, out3_temp7;
+    and a3_4(out3_temp4, in4[3], sel4);  // XOR[3] se sel4=1
+    and a3_5(out3_temp5, in5[3], sel5);  // MULTIPLICAÇÃO[3] se sel5=1
+    and a3_6(out3_temp6, in6[3], sel6);  // DIVISÃO[3] se sel6=1
+    and a3_7(out3_temp7, in7[3], sel7);  // Não usado[3] se sel7=1
+    
+    wire out3_temp8, out3_temp9;
+    or o3_0(out3_temp8, out3_temp0, out3_temp1, out3_temp2, out3_temp3);
+    or o3_1(out3_temp9, out3_temp4, out3_temp5, out3_temp6, out3_temp7);
+    or o3_final(out[3], out3_temp8, out3_temp9);
+
+endmodule

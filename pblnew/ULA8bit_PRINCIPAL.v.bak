@@ -1,0 +1,220 @@
+// ULA 8-bits principal com contador de estados e detecção de overflow
+module ULA8bit_PRINCIPAL(
+    input  CLOCK_50,     // Clock da placa
+    input  [7:0]  SW,   // 8 switches para dados (A, B) e OP[7:5]
+    input  [1:0]  KEY,  // KEY[0]=avança estado, KEY[1]=reset
+    output [8:0]  LEDR, // LEDR[7:0]=resultado, LEDR[8]=overflow
+    output [6:0]  HEX0  // Display 7 segmentos
+);
+
+    // Sinais de controle
+    wire [1:0] state;           // Estado atual (2 bits)
+    wire [7:0] A_registered;    // A registrado (só no estado 00)
+    wire [7:0] B_registered;    // B registrado (só no estado 01)
+    wire [2:0] OP_registered;   // OP registrado (só no estado 10)
+    wire [7:0] resultado_anterior; // Resultado anterior (8 bits)
+    wire [8:0] resultado_completo; // {overflow, resultado[7:0]}
+    wire [7:0] primeiro_operando;  // A ou resultado_anterior
+    wire [7:0] segundo_operando;  // B registrado
+    wire [7:0] result;           // Resultado da operação (8 bits)
+    wire       overflow;         // Flag de overflow
+    
+    // OP vem dos 3 bits mais significativos de SW
+    wire [2:0] OP = SW[7:5];
+    
+    // Contador de estados
+    contador_estados contador(
+        .clk_btn(CLOCK_50),     // Clock da placa
+        .rst_n_btn(KEY[1]),     // Reset ativo baixo
+        .key_advance(KEY[0]),   // KEY[0] para avançar estado
+        .q(state)
+    );
+    
+    // Registro de A (só carrega no estado 00)
+    wire load_A = (state == 2'b00);
+    DFF8bit_simples registro_A(
+        .D(SW),
+        .clk(load_A),
+        .rst(KEY[1]),
+        .Q(A_registered)
+    );
+    
+    // Registro de B (só carrega no estado 01)
+    wire load_B = (state == 2'b01);
+    DFF8bit_simples registro_B(
+        .D(SW),
+        .clk(load_B),
+        .rst(KEY[1]),
+        .Q(B_registered)
+    );
+    
+    // Registro de OP (só carrega no estado 10)
+    wire load_OP = (state == 2'b10);
+    DFF3bit_simples registro_OP(
+        .D(OP),
+        .clk(load_OP),
+        .rst(KEY[1]),
+        .Q(OP_registered)
+    );
+    
+    // Registro de resultado (carrega nos estados 11)
+    wire load_resultado = (state == 2'b11);
+    registrador_resultado reg_resultado(
+        .resultado(result),
+        .overflow(overflow),
+        .clk(load_resultado),
+        .rst(KEY[1]),
+        .Q(resultado_completo)
+    );
+    
+    // Extrair resultado anterior (8 bits)
+    assign resultado_anterior = resultado_completo[7:0];
+    
+    // MUX para seleção do primeiro operando
+    // Primeira operação: usa A (sel = 0)
+    // Operações seguintes: usa resultado_anterior (sel = 1)
+    wire sel_primeiro = (state == 2'b10) & (resultado_anterior != 8'b00000000);
+    mux_operando mux_op(
+        .A(A_registered),
+        .resultado_anterior(resultado_anterior),
+        .sel(sel_primeiro),
+        .out(primeiro_operando)
+    );
+    
+    // Segundo operando (B registrado)
+    assign segundo_operando = B_registered;
+    
+    // -----------------------------
+    // 1) SOMA (op = 000)
+    // -----------------------------
+    wire [7:0] sum;
+    wire sum_cout;
+    Addition8bit somador(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Cin(1'b0),  // Cin fixo em 0
+        .Sum(sum),
+        .Cout(sum_cout)
+    );
+    
+    // -----------------------------
+    // 2) SUBTRAÇÃO (op = 001)
+    // -----------------------------
+    wire [7:0] sub;
+    wire sub_cout;
+    SUB8bit subtrator(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Result(sub),
+        .Borrow(sub_cout)
+    );
+    
+    // -----------------------------
+    // 3) OR (op = 010)
+    // -----------------------------
+    wire [7:0] or_result;
+    OR8bit or_module(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Result(or_result)
+    );
+    
+    // -----------------------------
+    // 4) AND (op = 011)
+    // -----------------------------
+    wire [7:0] and_result;
+    AND8bit and_module(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Result(and_result)
+    );
+    
+    // -----------------------------
+    // 5) XOR (op = 100)
+    // -----------------------------
+    wire [7:0] xor_result;
+    XOR8bit xor_module(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Result(xor_result)
+    );
+    
+    // -----------------------------
+    // 6) MULTIPLICAÇÃO (op = 101)
+    // -----------------------------
+    wire [7:0] mult_result;
+    wire mult_overflow;
+    MULT8bit mult_module(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Result(mult_result),
+        .Overflow(mult_overflow)
+    );
+    
+    // -----------------------------
+    // 7) DIVISÃO (op = 110)
+    // -----------------------------
+    wire [7:0] div_quotient, div_remainder;
+    wire div_error, div_fractional;
+    DIV8bit div_module(
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Quotient(div_quotient),
+        .Remainder(div_remainder),
+        .Error(div_error),
+        .Fractional(div_fractional)
+    );
+    
+    // -----------------------------
+    // 8) NOT (op = 111)
+    // -----------------------------
+    wire [7:0] not_result;
+    NOT8bit not_module(
+        .A(primeiro_operando),
+        .Result(not_result)
+    );
+    
+    // -----------------------------
+    // 9) Seleção do resultado final com MUX
+    // -----------------------------
+    MUX8x8 result_mux(
+        .in0(sum),           // op = 000 → SOMA
+        .in1(sub),           // op = 001 → SUBTRAÇÃO
+        .in2(or_result),     // op = 010 → OR
+        .in3(and_result),    // op = 011 → AND
+        .in4(xor_result),    // op = 100 → XOR
+        .in5(mult_result),   // op = 101 → MULTIPLICAÇÃO
+        .in6(div_quotient),  // op = 110 → DIVISÃO (quociente)
+        .in7(not_result),    // op = 111 → NOT
+        .sel(OP_registered), // Sinal de seleção da operação registrado
+        .out(result)         // Resultado final
+    );
+    
+    // -----------------------------
+    // 10) Detecção de overflow
+    // -----------------------------
+    detector_overflow overflow_detector(
+        .op(OP_registered),  // Operação registrada
+        .A(primeiro_operando),
+        .B(segundo_operando),
+        .Cin(1'b0),          // Cin fixo em 0
+        .sum_cout(sum_cout),
+        .sub_borrow(sub_cout),
+        .mult_overflow(mult_overflow),
+        .div_error(div_error),
+        .overflow(overflow)
+    );
+    
+    // -----------------------------
+    // 11) Saídas
+    // -----------------------------
+    assign LEDR[7:0] = result;        // Resultado (8 bits)
+    assign LEDR[8] = overflow;       // Flag de overflow
+    
+    // Display 7 segmentos (só os 4 bits menos significativos)
+    display7seg disp(
+        .bin(result[3:0]),
+        .seg(HEX0)
+    );
+
+endmodule

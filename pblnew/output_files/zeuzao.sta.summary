@@ -1,0 +1,65 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'CLOCK_50'
+Slack : -7.934
+TNS   : -130.977
+
+Type  : Slow 1200mV 85C Model Hold 'CLOCK_50'
+Slack : 0.322
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Recovery 'CLOCK_50'
+Slack : -1.329
+TNS   : -32.963
+
+Type  : Slow 1200mV 85C Model Removal 'CLOCK_50'
+Slack : 0.932
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -64.732
+
+Type  : Slow 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -7.250
+TNS   : -118.384
+
+Type  : Slow 1200mV 0C Model Hold 'CLOCK_50'
+Slack : 0.289
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Recovery 'CLOCK_50'
+Slack : -1.141
+TNS   : -26.728
+
+Type  : Slow 1200mV 0C Model Removal 'CLOCK_50'
+Slack : 0.844
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -64.732
+
+Type  : Fast 1200mV 0C Model Setup 'CLOCK_50'
+Slack : -2.853
+TNS   : -39.406
+
+Type  : Fast 1200mV 0C Model Hold 'CLOCK_50'
+Slack : 0.140
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Recovery 'CLOCK_50'
+Slack : -0.129
+TNS   : -1.197
+
+Type  : Fast 1200mV 0C Model Removal 'CLOCK_50'
+Slack : 0.408
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLOCK_50'
+Slack : -3.000
+TNS   : -48.788
+
+------------------------------------------------------------
